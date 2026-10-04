@@ -36,13 +36,13 @@ class PokemonDB(Base):
     
     # nullable=False: significa basicamente que este campo é obrigatório
     nome = Column(String, nullable=False, index=True)
-    geracao = Column(Integer, nullable=False)
-    regiao = Column(String, nullable=False)
+    geracao = Column(Integer, nullable=False, index=True)
+    regiao = Column(String, nullable=False, index=True)
     
     # SQLite nao tem suporte nativo pra listas
-    # pensando nisso, a gnt vai sarlvar a lista como um texto em json
-    # por exempol: a lista ['grass', 'poison'] vira uma string '["grass", "poison"]' no banco.
-    tipos = Column(String, nullable=False)
+    # pensando nisso, a gnt vai salvar a lista como um texto em json
+    # por exemplo: a lista ['grass', 'poison'] vira uma string '["grass", "poison"]' no banco.
+    tipos = Column(String, nullable=False, index=True)
     
     # nullable=True: caso o link da imagem quebre na API original,
     # a gnt vai aceitar que seja nulo (opcional) p evitar quebrar a API

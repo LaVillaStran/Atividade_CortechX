@@ -77,8 +77,42 @@ def deletar_pokemon(pokemon_id: int, db: Session = Depends(get_db)):
     db.commit()
     return None
 
-# TODO - GET nome 
+# EXTRAS:
 
-# TODO - GET regiao
+# GET nome 
+@router.get("/nome/{nome}", response_model=List[schemas.PokemonOut])
+def procura_pokemon_por_nome(nome : str, db: Session = Depends(get_db)):
+    pokemons = db.query(models.PokemonDB).filter(models.PokemonDB.nome == nome.strip().lower()).first() # Vai filtrar o pokémon que tem o nome exato que foi passado
+    if not pokemons:
+        raise HTTPException(status_code=404, detail="Pokémon não encontrado.") # Retorna um erro se não encontrar o nome no database
+    else:
+        return [para_schema(pokemons)]
 
-# TODO - GET tipo
+# GET regiao
+@router.get("/regiao/{regiao}", response_model=List[schemas.PokemonOut])
+def procurar_pokemon_por_regiao(regiao : str, db: Session = Depends(get_db)):
+    # Filtra os pokémons da região passada e ordena todos pelo ID, retorna todos daquela região
+    pokemons = db.query(models.PokemonDB).filter(models.PokemonDB.regiao == regiao.strip().lower()).order_by(models.PokemonDB.id).all()
+    if not pokemons:
+        raise HTTPException(status_code=404, detail="Região não existente no banco de dados")
+    else:  
+        return [para_schema(p) for p in pokemons]
+
+# GET tipo
+@router.get("/tipo/{tipo}", response_model=List[schemas.PokemonOut])
+def procura_pokemon_por_tipo(tipo : str, db: Session = Depends(get_db)):
+    # Aqui acabo tendo que usar um for para verificar o pokemon tem o tipo, pois
+    # Os dados no database é apenas uma string em formato de json
+    # Então acaba sendo necessário fazer desse jeito se a implementação dos tipos forem assim
+    pokemons = db.query(models.PokemonDB).all()
+    pokemons_filt = []
+    for pokemon in pokemons:
+        tipos = json.loads(pokemon.tipos)
+        if tipo in tipos:
+            pokemons_filt.append(pokemon)
+            continue
+    
+    if len(pokemons_filt) == 0:
+        raise HTTPException(status_code=404, detail="Pokémon com esse tipo não encontrado")
+    else:
+        return [para_schema(p) for p in pokemons_filt]
