@@ -38,7 +38,13 @@ for i in range(1,2): ## Esse for ele foi criado para caso queirmos buscar mais d
 
             numero = dados_pokemon["id"] ## número da pokedex
 
-            tipos = [item["type"]["name"] for item in dados_pokemon["types"]] ## tipos
+            tipos_1 = dados_pokemon["types"][0]["type"]["name"] ## tipos
+
+            tipos_2 = None
+
+            if (len(dados_pokemon["types"]) > 1):
+
+                tipos_2 = dados_pokemon["types"][1]["type"]["name"]
 
             sprite = dados_pokemon["sprites"]["versions"]["generation-i"]["yellow"]["front_transparent"] ## sprites
 
@@ -51,7 +57,7 @@ for i in range(1,2): ## Esse for ele foi criado para caso queirmos buscar mais d
             lista_pokemons.append(
 
                 
-                (numero,pokemon["name"],i,regiao,tipos,sprite) ## Aqui criamos a tupla com os valores obtidos
+                (numero,pokemon["name"],i,regiao,tipos_1,tipos_2,sprite) ## Aqui criamos a tupla com os valores obtidos
 
             )
 
