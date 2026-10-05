@@ -39,15 +39,15 @@ class PokemonDB(Base):
     geracao = Column(Integer, nullable=False, index=True)
     regiao = Column(String, nullable=False, index=True)
     
-    # SQLite nao tem suporte nativo pra listas
-    # pensando nisso, a gnt vai salvar a lista como um texto em json
-    # por exemplo: a lista ['grass', 'poison'] vira uma string '["grass", "poison"]' no banco.
-    tipos = Column(String, nullable=False, index=True)
+    # os tipos de pokemons tiveram algumas reformulações e fizemos a criação,
+    # de duas colunas contendo os tipos de um pokemon
+
+    tipo_1 = Column(String, nullable=False)
+
+    # nullable=True: caso o pokemon tenha apenas um tipo
+
+    tipo_2 = Column(String, nullable=True)
     
     # nullable=True: caso o link da imagem quebre na API original,
     # a gnt vai aceitar que seja nulo (opcional) p evitar quebrar a API
     sprite = Column(String, nullable=True)
-
-    def tipos_lista(self) -> List[str]:
-        # converte a string JSON de volta para uma lista de strings
-        return json.loads(self.tipos)
