@@ -18,7 +18,7 @@ def popular():
     inseridos = 0
     
     try:
-        for numero, nome, geracao, regiao, tipos, sprite in lista:
+        for numero, nome, geracao, regiao, tipo_1, tipo_2, sprite in lista:
 
             if db.get(PokemonDB, numero):
                 continue  
@@ -28,7 +28,8 @@ def popular():
                 nome=nome,
                 geracao=geracao,
                 regiao=regiao,
-                tipos=json.dumps(tipos, ensure_ascii=False),
+                tipo_1 = tipo_1,
+                tipo_2 = tipo_2,
                 sprite=sprite,
             ))
             inseridos += 1

@@ -18,7 +18,8 @@ def para_schema(pokemon: models.PokemonDB) -> schemas.PokemonOut:
         nome=pokemon.nome,
         geracao=pokemon.geracao,
         regiao=pokemon.regiao,
-        tipos=pokemon.tipos_lista(),
+        tipo_1=pokemon.tipo_1,
+        tipo_2=pokemon.tipo_2,
         sprite=pokemon.sprite,
     )
 
@@ -36,7 +37,6 @@ def criar_pokemon(pokemon: schemas.PokemonCreate, db: Session = Depends(get_db))
         raise HTTPException(status_code=409, detail="Já existe um pokémon com esse id.")
 
     dados = pokemon.model_dump()
-    dados["tipos"] = json.dumps(dados["tipos"], ensure_ascii=False)
 
     novo = models.PokemonDB(**dados)
     db.add(novo)
@@ -57,7 +57,6 @@ def atualizar_pokemon(pokemon_id: int, pokemon_atualizado: schemas.PokemonCreate
         raise HTTPException(status_code=409, detail="Já existe outro pokémon com esse id.")
 
     dados = pokemon_atualizado.model_dump()
-    dados["tipos"] = json.dumps(dados["tipos"], ensure_ascii=False)
 
     for key, value in dados.items():
         setattr(pokemon_db, key, value)
@@ -77,8 +76,33 @@ def deletar_pokemon(pokemon_id: int, db: Session = Depends(get_db)):
     db.commit()
     return None
 
-# TODO - GET nome 
+# EXTRAS:
 
-# TODO - GET regiao
+# GET nome 
+@router.get("/nome/{nome}", response_model=List[schemas.PokemonOut])
+def procura_pokemon_por_nome(nome : str, db: Session = Depends(get_db)):
+    pokemons = db.query(models.PokemonDB).filter(models.PokemonDB.nome == nome.strip().lower()).first() # Vai filtrar o pokémon que tem o nome exato que foi passado
+    if not pokemons:
+        raise HTTPException(status_code=404, detail="Pokémon não encontrado.") # Retorna um erro se não encontrar o nome no database
+    else:
+        return [para_schema(pokemons)]
 
-# TODO - GET tipo
+# GET regiao
+@router.get("/regiao/{regiao}", response_model=List[schemas.PokemonOut])
+def procurar_pokemon_por_regiao(regiao : str, db: Session = Depends(get_db)):
+    # Filtra os pokémons da região passada e ordena todos pelo ID, retorna todos daquela região
+    pokemons = db.query(models.PokemonDB).filter(models.PokemonDB.regiao == regiao.strip().lower()).order_by(models.PokemonDB.id).all()
+    if not pokemons:
+        raise HTTPException(status_code=404, detail="Região não existente no banco de dados")
+    else:  
+        return [para_schema(p) for p in pokemons]
+
+# GET tipo
+@router.get("/tipo/{tipo}", response_model=List[schemas.PokemonOut])
+def procura_pokemon_por_tipo(tipo : str, db: Session = Depends(get_db)):
+    pokemons = db.query(models.PokemonDB).filter(models.PokemonDB.tipo_1==tipo.strip().lower() or models.PokemonDB.tipo_2==tipo.strip().lower()).order_by(models.PokemonDB.id).all()
+
+    if not pokemons:
+        raise HTTPException(status_code=404, detail="Pokémon com esse tipo não encontrado")
+    else:
+        return [para_schema(p) for p in pokemons]

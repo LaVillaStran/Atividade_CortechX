@@ -22,9 +22,9 @@ class PokemonBase(BaseModel):
     geracao: int = Field(..., gt=0)
     regiao: str = Field(..., min_length=1)
     
-    # max_length=2: max de 2 tipos
-    tipos: List[str] = Field(..., min_length=1, max_length=2)
-    
+    # min_length= 1: por tipo
+    tipo_1: str = Field(..., min_length=1)
+    tipo_2: str | None = None
     # optional: pode ser nulo caso nao de p pegar a foto da api
     sprite: Optional[str] = None
 
