@@ -1,10 +1,7 @@
 import json
-lista =[]
+import requests
 
-for i in range(1,10):
-    lista.append(
-        (i,i+i,i+i+i)
-    )
-
+url_pokemon = f"https://pokeapi.co/api/v2/pokemon/pikachu/"
+dados_pokemon = requests.get(url_pokemon).json()
 with open('dados1.json', 'w', encoding='utf-8') as f:
-    json.dump(lista, f, ensure_ascii=True, indent=4)
+    json.dump(dados_pokemon, f, ensure_ascii=True, indent=4)

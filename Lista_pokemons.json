@@ -4,10 +4,8 @@
         "bulbasaur",
         1,
         "kanto",
-        [
-            "grass",
-            "poison"
-        ],
+        "grass",
+        "poison",
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/1.png"
     ],
     [
@@ -15,10 +13,8 @@
         "ivysaur",
         1,
         "kanto",
-        [
-            "grass",
-            "poison"
-        ],
+        "grass",
+        "poison",
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/2.png"
     ],
     [
@@ -26,10 +22,8 @@
         "venusaur",
         1,
         "kanto",
-        [
-            "grass",
-            "poison"
-        ],
+        "grass",
+        "poison",
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/3.png"
     ],
     [
@@ -37,9 +31,8 @@
         "charmander",
         1,
         "kanto",
-        [
-            "fire"
-        ],
+        "fire",
+        null,
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/4.png"
     ],
     [
@@ -47,9 +40,8 @@
         "charmeleon",
         1,
         "kanto",
-        [
-            "fire"
-        ],
+        "fire",
+        null,
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/5.png"
     ],
     [
@@ -57,10 +49,8 @@
         "charizard",
         1,
         "kanto",
-        [
-            "fire",
-            "flying"
-        ],
+        "fire",
+        "flying",
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/6.png"
     ],
     [
@@ -68,9 +58,8 @@
         "squirtle",
         1,
         "kanto",
-        [
-            "water"
-        ],
+        "water",
+        null,
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/7.png"
     ],
     [
@@ -78,9 +67,8 @@
         "wartortle",
         1,
         "kanto",
-        [
-            "water"
-        ],
+        "water",
+        null,
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/8.png"
     ],
     [
@@ -88,9 +76,8 @@
         "blastoise",
         1,
         "kanto",
-        [
-            "water"
-        ],
+        "water",
+        null,
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/9.png"
     ],
     [
@@ -98,9 +85,8 @@
         "caterpie",
         1,
         "kanto",
-        [
-            "bug"
-        ],
+        "bug",
+        null,
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/10.png"
     ],
     [
@@ -108,9 +94,8 @@
         "metapod",
         1,
         "kanto",
-        [
-            "bug"
-        ],
+        "bug",
+        null,
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/11.png"
     ],
     [
@@ -118,10 +103,8 @@
         "butterfree",
         1,
         "kanto",
-        [
-            "bug",
-            "flying"
-        ],
+        "bug",
+        "flying",
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/12.png"
     ],
     [
@@ -129,10 +112,8 @@
         "weedle",
         1,
         "kanto",
-        [
-            "bug",
-            "poison"
-        ],
+        "bug",
+        "poison",
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/13.png"
     ],
     [
@@ -140,10 +121,8 @@
         "kakuna",
         1,
         "kanto",
-        [
-            "bug",
-            "poison"
-        ],
+        "bug",
+        "poison",
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/14.png"
     ],
     [
@@ -151,10 +130,8 @@
         "beedrill",
         1,
         "kanto",
-        [
-            "bug",
-            "poison"
-        ],
+        "bug",
+        "poison",
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/15.png"
     ],
     [
@@ -162,10 +139,8 @@
         "pidgey",
         1,
         "kanto",
-        [
-            "normal",
-            "flying"
-        ],
+        "normal",
+        "flying",
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/16.png"
     ],
     [
@@ -173,10 +148,8 @@
         "pidgeotto",
         1,
         "kanto",
-        [
-            "normal",
-            "flying"
-        ],
+        "normal",
+        "flying",
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/17.png"
     ],
     [
@@ -184,10 +157,8 @@
         "pidgeot",
         1,
         "kanto",
-        [
-            "normal",
-            "flying"
-        ],
+        "normal",
+        "flying",
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/18.png"
     ],
     [
@@ -195,9 +166,8 @@
         "rattata",
         1,
         "kanto",
-        [
-            "normal"
-        ],
+        "normal",
+        null,
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/19.png"
     ],
     [
@@ -205,9 +175,8 @@
         "raticate",
         1,
         "kanto",
-        [
-            "normal"
-        ],
+        "normal",
+        null,
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/20.png"
     ],
     [
@@ -215,10 +184,8 @@
         "spearow",
         1,
         "kanto",
-        [
-            "normal",
-            "flying"
-        ],
+        "normal",
+        "flying",
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/21.png"
     ],
     [
@@ -226,10 +193,8 @@
         "fearow",
         1,
         "kanto",
-        [
-            "normal",
-            "flying"
-        ],
+        "normal",
+        "flying",
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/22.png"
     ],
     [
@@ -237,9 +202,8 @@
         "ekans",
         1,
         "kanto",
-        [
-            "poison"
-        ],
+        "poison",
+        null,
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/23.png"
     ],
     [
@@ -247,9 +211,8 @@
         "arbok",
         1,
         "kanto",
-        [
-            "poison"
-        ],
+        "poison",
+        null,
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/24.png"
     ],
     [
@@ -257,9 +220,8 @@
         "pikachu",
         1,
         "kanto",
-        [
-            "electric"
-        ],
+        "electric",
+        null,
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/25.png"
     ],
     [
@@ -267,9 +229,8 @@
         "raichu",
         1,
         "kanto",
-        [
-            "electric"
-        ],
+        "electric",
+        null,
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/26.png"
     ],
     [
@@ -277,9 +238,8 @@
         "sandshrew",
         1,
         "kanto",
-        [
-            "ground"
-        ],
+        "ground",
+        null,
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/27.png"
     ],
     [
@@ -287,9 +247,8 @@
         "sandslash",
         1,
         "kanto",
-        [
-            "ground"
-        ],
+        "ground",
+        null,
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/28.png"
     ],
     [
@@ -297,9 +256,8 @@
         "nidoran-f",
         1,
         "kanto",
-        [
-            "poison"
-        ],
+        "poison",
+        null,
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/29.png"
     ],
     [
@@ -307,9 +265,8 @@
         "nidorina",
         1,
         "kanto",
-        [
-            "poison"
-        ],
+        "poison",
+        null,
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/30.png"
     ],
     [
@@ -317,10 +274,8 @@
         "nidoqueen",
         1,
         "kanto",
-        [
-            "poison",
-            "ground"
-        ],
+        "poison",
+        "ground",
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/31.png"
     ],
     [
@@ -328,9 +283,8 @@
         "nidoran-m",
         1,
         "kanto",
-        [
-            "poison"
-        ],
+        "poison",
+        null,
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/32.png"
     ],
     [
@@ -338,9 +292,8 @@
         "nidorino",
         1,
         "kanto",
-        [
-            "poison"
-        ],
+        "poison",
+        null,
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/33.png"
     ],
     [
@@ -348,10 +301,8 @@
         "nidoking",
         1,
         "kanto",
-        [
-            "poison",
-            "ground"
-        ],
+        "poison",
+        "ground",
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/34.png"
     ],
     [
@@ -359,9 +310,8 @@
         "clefairy",
         1,
         "kanto",
-        [
-            "fairy"
-        ],
+        "fairy",
+        null,
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/35.png"
     ],
     [
@@ -369,9 +319,8 @@
         "clefable",
         1,
         "kanto",
-        [
-            "fairy"
-        ],
+        "fairy",
+        null,
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/36.png"
     ],
     [
@@ -379,9 +328,8 @@
         "vulpix",
         1,
         "kanto",
-        [
-            "fire"
-        ],
+        "fire",
+        null,
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/37.png"
     ],
     [
@@ -389,9 +337,8 @@
         "ninetales",
         1,
         "kanto",
-        [
-            "fire"
-        ],
+        "fire",
+        null,
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/38.png"
     ],
     [
@@ -399,10 +346,8 @@
         "jigglypuff",
         1,
         "kanto",
-        [
-            "normal",
-            "fairy"
-        ],
+        "normal",
+        "fairy",
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/39.png"
     ],
     [
@@ -410,10 +355,8 @@
         "wigglytuff",
         1,
         "kanto",
-        [
-            "normal",
-            "fairy"
-        ],
+        "normal",
+        "fairy",
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/40.png"
     ],
     [
@@ -421,10 +364,8 @@
         "zubat",
         1,
         "kanto",
-        [
-            "poison",
-            "flying"
-        ],
+        "poison",
+        "flying",
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/41.png"
     ],
     [
@@ -432,10 +373,8 @@
         "golbat",
         1,
         "kanto",
-        [
-            "poison",
-            "flying"
-        ],
+        "poison",
+        "flying",
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/42.png"
     ],
     [
@@ -443,10 +382,8 @@
         "oddish",
         1,
         "kanto",
-        [
-            "grass",
-            "poison"
-        ],
+        "grass",
+        "poison",
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/43.png"
     ],
     [
@@ -454,10 +391,8 @@
         "gloom",
         1,
         "kanto",
-        [
-            "grass",
-            "poison"
-        ],
+        "grass",
+        "poison",
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/44.png"
     ],
     [
@@ -465,10 +400,8 @@
         "vileplume",
         1,
         "kanto",
-        [
-            "grass",
-            "poison"
-        ],
+        "grass",
+        "poison",
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/45.png"
     ],
     [
@@ -476,10 +409,8 @@
         "paras",
         1,
         "kanto",
-        [
-            "bug",
-            "grass"
-        ],
+        "bug",
+        "grass",
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/46.png"
     ],
     [
@@ -487,10 +418,8 @@
         "parasect",
         1,
         "kanto",
-        [
-            "bug",
-            "grass"
-        ],
+        "bug",
+        "grass",
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/47.png"
     ],
     [
@@ -498,10 +427,8 @@
         "venonat",
         1,
         "kanto",
-        [
-            "bug",
-            "poison"
-        ],
+        "bug",
+        "poison",
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/48.png"
     ],
     [
@@ -509,10 +436,8 @@
         "venomoth",
         1,
         "kanto",
-        [
-            "bug",
-            "poison"
-        ],
+        "bug",
+        "poison",
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/49.png"
     ],
     [
@@ -520,9 +445,8 @@
         "diglett",
         1,
         "kanto",
-        [
-            "ground"
-        ],
+        "ground",
+        null,
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/50.png"
     ],
     [
@@ -530,9 +454,8 @@
         "dugtrio",
         1,
         "kanto",
-        [
-            "ground"
-        ],
+        "ground",
+        null,
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/51.png"
     ],
     [
@@ -540,9 +463,8 @@
         "meowth",
         1,
         "kanto",
-        [
-            "normal"
-        ],
+        "normal",
+        null,
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/52.png"
     ],
     [
@@ -550,9 +472,8 @@
         "persian",
         1,
         "kanto",
-        [
-            "normal"
-        ],
+        "normal",
+        null,
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/53.png"
     ],
     [
@@ -560,9 +481,8 @@
         "psyduck",
         1,
         "kanto",
-        [
-            "water"
-        ],
+        "water",
+        null,
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/54.png"
     ],
     [
@@ -570,9 +490,8 @@
         "golduck",
         1,
         "kanto",
-        [
-            "water"
-        ],
+        "water",
+        null,
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/55.png"
     ],
     [
@@ -580,9 +499,8 @@
         "mankey",
         1,
         "kanto",
-        [
-            "fighting"
-        ],
+        "fighting",
+        null,
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/56.png"
     ],
     [
@@ -590,9 +508,8 @@
         "primeape",
         1,
         "kanto",
-        [
-            "fighting"
-        ],
+        "fighting",
+        null,
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/57.png"
     ],
     [
@@ -600,9 +517,8 @@
         "growlithe",
         1,
         "kanto",
-        [
-            "fire"
-        ],
+        "fire",
+        null,
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/58.png"
     ],
     [
@@ -610,9 +526,8 @@
         "arcanine",
         1,
         "kanto",
-        [
-            "fire"
-        ],
+        "fire",
+        null,
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/59.png"
     ],
     [
@@ -620,9 +535,8 @@
         "poliwag",
         1,
         "kanto",
-        [
-            "water"
-        ],
+        "water",
+        null,
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/60.png"
     ],
     [
@@ -630,9 +544,8 @@
         "poliwhirl",
         1,
         "kanto",
-        [
-            "water"
-        ],
+        "water",
+        null,
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/61.png"
     ],
     [
@@ -640,10 +553,8 @@
         "poliwrath",
         1,
         "kanto",
-        [
-            "water",
-            "fighting"
-        ],
+        "water",
+        "fighting",
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/62.png"
     ],
     [
@@ -651,9 +562,8 @@
         "abra",
         1,
         "kanto",
-        [
-            "psychic"
-        ],
+        "psychic",
+        null,
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/63.png"
     ],
     [
@@ -661,9 +571,8 @@
         "kadabra",
         1,
         "kanto",
-        [
-            "psychic"
-        ],
+        "psychic",
+        null,
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/64.png"
     ],
     [
@@ -671,9 +580,8 @@
         "alakazam",
         1,
         "kanto",
-        [
-            "psychic"
-        ],
+        "psychic",
+        null,
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/65.png"
     ],
     [
@@ -681,9 +589,8 @@
         "machop",
         1,
         "kanto",
-        [
-            "fighting"
-        ],
+        "fighting",
+        null,
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/66.png"
     ],
     [
@@ -691,9 +598,8 @@
         "machoke",
         1,
         "kanto",
-        [
-            "fighting"
-        ],
+        "fighting",
+        null,
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/67.png"
     ],
     [
@@ -701,9 +607,8 @@
         "machamp",
         1,
         "kanto",
-        [
-            "fighting"
-        ],
+        "fighting",
+        null,
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/68.png"
     ],
     [
@@ -711,10 +616,8 @@
         "bellsprout",
         1,
         "kanto",
-        [
-            "grass",
-            "poison"
-        ],
+        "grass",
+        "poison",
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/69.png"
     ],
     [
@@ -722,10 +625,8 @@
         "weepinbell",
         1,
         "kanto",
-        [
-            "grass",
-            "poison"
-        ],
+        "grass",
+        "poison",
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/70.png"
     ],
     [
@@ -733,10 +634,8 @@
         "victreebel",
         1,
         "kanto",
-        [
-            "grass",
-            "poison"
-        ],
+        "grass",
+        "poison",
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/71.png"
     ],
     [
@@ -744,10 +643,8 @@
         "tentacool",
         1,
         "kanto",
-        [
-            "water",
-            "poison"
-        ],
+        "water",
+        "poison",
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/72.png"
     ],
     [
@@ -755,10 +652,8 @@
         "tentacruel",
         1,
         "kanto",
-        [
-            "water",
-            "poison"
-        ],
+        "water",
+        "poison",
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/73.png"
     ],
     [
@@ -766,10 +661,8 @@
         "geodude",
         1,
         "kanto",
-        [
-            "rock",
-            "ground"
-        ],
+        "rock",
+        "ground",
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/74.png"
     ],
     [
@@ -777,10 +670,8 @@
         "graveler",
         1,
         "kanto",
-        [
-            "rock",
-            "ground"
-        ],
+        "rock",
+        "ground",
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/75.png"
     ],
     [
@@ -788,10 +679,8 @@
         "golem",
         1,
         "kanto",
-        [
-            "rock",
-            "ground"
-        ],
+        "rock",
+        "ground",
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/76.png"
     ],
     [
@@ -799,9 +688,8 @@
         "ponyta",
         1,
         "kanto",
-        [
-            "fire"
-        ],
+        "fire",
+        null,
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/77.png"
     ],
     [
@@ -809,9 +697,8 @@
         "rapidash",
         1,
         "kanto",
-        [
-            "fire"
-        ],
+        "fire",
+        null,
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/78.png"
     ],
     [
@@ -819,10 +706,8 @@
         "slowpoke",
         1,
         "kanto",
-        [
-            "water",
-            "psychic"
-        ],
+        "water",
+        "psychic",
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/79.png"
     ],
     [
@@ -830,10 +715,8 @@
         "slowbro",
         1,
         "kanto",
-        [
-            "water",
-            "psychic"
-        ],
+        "water",
+        "psychic",
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/80.png"
     ],
     [
@@ -841,10 +724,8 @@
         "magnemite",
         1,
         "kanto",
-        [
-            "electric",
-            "steel"
-        ],
+        "electric",
+        "steel",
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/81.png"
     ],
     [
@@ -852,10 +733,8 @@
         "magneton",
         1,
         "kanto",
-        [
-            "electric",
-            "steel"
-        ],
+        "electric",
+        "steel",
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/82.png"
     ],
     [
@@ -863,10 +742,8 @@
         "farfetchd",
         1,
         "kanto",
-        [
-            "normal",
-            "flying"
-        ],
+        "normal",
+        "flying",
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/83.png"
     ],
     [
@@ -874,10 +751,8 @@
         "doduo",
         1,
         "kanto",
-        [
-            "normal",
-            "flying"
-        ],
+        "normal",
+        "flying",
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/84.png"
     ],
     [
@@ -885,10 +760,8 @@
         "dodrio",
         1,
         "kanto",
-        [
-            "normal",
-            "flying"
-        ],
+        "normal",
+        "flying",
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/85.png"
     ],
     [
@@ -896,9 +769,8 @@
         "seel",
         1,
         "kanto",
-        [
-            "water"
-        ],
+        "water",
+        null,
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/86.png"
     ],
     [
@@ -906,10 +778,8 @@
         "dewgong",
         1,
         "kanto",
-        [
-            "water",
-            "ice"
-        ],
+        "water",
+        "ice",
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/87.png"
     ],
     [
@@ -917,9 +787,8 @@
         "grimer",
         1,
         "kanto",
-        [
-            "poison"
-        ],
+        "poison",
+        null,
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/88.png"
     ],
     [
@@ -927,9 +796,8 @@
         "muk",
         1,
         "kanto",
-        [
-            "poison"
-        ],
+        "poison",
+        null,
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/89.png"
     ],
     [
@@ -937,9 +805,8 @@
         "shellder",
         1,
         "kanto",
-        [
-            "water"
-        ],
+        "water",
+        null,
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/90.png"
     ],
     [
@@ -947,10 +814,8 @@
         "cloyster",
         1,
         "kanto",
-        [
-            "water",
-            "ice"
-        ],
+        "water",
+        "ice",
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/91.png"
     ],
     [
@@ -958,10 +823,8 @@
         "gastly",
         1,
         "kanto",
-        [
-            "ghost",
-            "poison"
-        ],
+        "ghost",
+        "poison",
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/92.png"
     ],
     [
@@ -969,10 +832,8 @@
         "haunter",
         1,
         "kanto",
-        [
-            "ghost",
-            "poison"
-        ],
+        "ghost",
+        "poison",
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/93.png"
     ],
     [
@@ -980,10 +841,8 @@
         "gengar",
         1,
         "kanto",
-        [
-            "ghost",
-            "poison"
-        ],
+        "ghost",
+        "poison",
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/94.png"
     ],
     [
@@ -991,10 +850,8 @@
         "onix",
         1,
         "kanto",
-        [
-            "rock",
-            "ground"
-        ],
+        "rock",
+        "ground",
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/95.png"
     ],
     [
@@ -1002,9 +859,8 @@
         "drowzee",
         1,
         "kanto",
-        [
-            "psychic"
-        ],
+        "psychic",
+        null,
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/96.png"
     ],
     [
@@ -1012,9 +868,8 @@
         "hypno",
         1,
         "kanto",
-        [
-            "psychic"
-        ],
+        "psychic",
+        null,
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/97.png"
     ],
     [
@@ -1022,9 +877,8 @@
         "krabby",
         1,
         "kanto",
-        [
-            "water"
-        ],
+        "water",
+        null,
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/98.png"
     ],
     [
@@ -1032,9 +886,8 @@
         "kingler",
         1,
         "kanto",
-        [
-            "water"
-        ],
+        "water",
+        null,
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/99.png"
     ],
     [
@@ -1042,9 +895,8 @@
         "voltorb",
         1,
         "kanto",
-        [
-            "electric"
-        ],
+        "electric",
+        null,
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/100.png"
     ],
     [
@@ -1052,9 +904,8 @@
         "electrode",
         1,
         "kanto",
-        [
-            "electric"
-        ],
+        "electric",
+        null,
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/101.png"
     ],
     [
@@ -1062,10 +913,8 @@
         "exeggcute",
         1,
         "kanto",
-        [
-            "grass",
-            "psychic"
-        ],
+        "grass",
+        "psychic",
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/102.png"
     ],
     [
@@ -1073,10 +922,8 @@
         "exeggutor",
         1,
         "kanto",
-        [
-            "grass",
-            "psychic"
-        ],
+        "grass",
+        "psychic",
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/103.png"
     ],
     [
@@ -1084,9 +931,8 @@
         "cubone",
         1,
         "kanto",
-        [
-            "ground"
-        ],
+        "ground",
+        null,
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/104.png"
     ],
     [
@@ -1094,9 +940,8 @@
         "marowak",
         1,
         "kanto",
-        [
-            "ground"
-        ],
+        "ground",
+        null,
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/105.png"
     ],
     [
@@ -1104,9 +949,8 @@
         "hitmonlee",
         1,
         "kanto",
-        [
-            "fighting"
-        ],
+        "fighting",
+        null,
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/106.png"
     ],
     [
@@ -1114,9 +958,8 @@
         "hitmonchan",
         1,
         "kanto",
-        [
-            "fighting"
-        ],
+        "fighting",
+        null,
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/107.png"
     ],
     [
@@ -1124,9 +967,8 @@
         "lickitung",
         1,
         "kanto",
-        [
-            "normal"
-        ],
+        "normal",
+        null,
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/108.png"
     ],
     [
@@ -1134,9 +976,8 @@
         "koffing",
         1,
         "kanto",
-        [
-            "poison"
-        ],
+        "poison",
+        null,
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/109.png"
     ],
     [
@@ -1144,9 +985,8 @@
         "weezing",
         1,
         "kanto",
-        [
-            "poison"
-        ],
+        "poison",
+        null,
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/110.png"
     ],
     [
@@ -1154,10 +994,8 @@
         "rhyhorn",
         1,
         "kanto",
-        [
-            "ground",
-            "rock"
-        ],
+        "ground",
+        "rock",
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/111.png"
     ],
     [
@@ -1165,10 +1003,8 @@
         "rhydon",
         1,
         "kanto",
-        [
-            "ground",
-            "rock"
-        ],
+        "ground",
+        "rock",
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/112.png"
     ],
     [
@@ -1176,9 +1012,8 @@
         "chansey",
         1,
         "kanto",
-        [
-            "normal"
-        ],
+        "normal",
+        null,
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/113.png"
     ],
     [
@@ -1186,9 +1021,8 @@
         "tangela",
         1,
         "kanto",
-        [
-            "grass"
-        ],
+        "grass",
+        null,
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/114.png"
     ],
     [
@@ -1196,9 +1030,8 @@
         "kangaskhan",
         1,
         "kanto",
-        [
-            "normal"
-        ],
+        "normal",
+        null,
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/115.png"
     ],
     [
@@ -1206,9 +1039,8 @@
         "horsea",
         1,
         "kanto",
-        [
-            "water"
-        ],
+        "water",
+        null,
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/116.png"
     ],
     [
@@ -1216,9 +1048,8 @@
         "seadra",
         1,
         "kanto",
-        [
-            "water"
-        ],
+        "water",
+        null,
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/117.png"
     ],
     [
@@ -1226,9 +1057,8 @@
         "goldeen",
         1,
         "kanto",
-        [
-            "water"
-        ],
+        "water",
+        null,
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/118.png"
     ],
     [
@@ -1236,9 +1066,8 @@
         "seaking",
         1,
         "kanto",
-        [
-            "water"
-        ],
+        "water",
+        null,
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/119.png"
     ],
     [
@@ -1246,9 +1075,8 @@
         "staryu",
         1,
         "kanto",
-        [
-            "water"
-        ],
+        "water",
+        null,
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/120.png"
     ],
     [
@@ -1256,10 +1084,8 @@
         "starmie",
         1,
         "kanto",
-        [
-            "water",
-            "psychic"
-        ],
+        "water",
+        "psychic",
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/121.png"
     ],
     [
@@ -1267,10 +1093,8 @@
         "mr-mime",
         1,
         "kanto",
-        [
-            "psychic",
-            "fairy"
-        ],
+        "psychic",
+        "fairy",
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/122.png"
     ],
     [
@@ -1278,10 +1102,8 @@
         "scyther",
         1,
         "kanto",
-        [
-            "bug",
-            "flying"
-        ],
+        "bug",
+        "flying",
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/123.png"
     ],
     [
@@ -1289,10 +1111,8 @@
         "jynx",
         1,
         "kanto",
-        [
-            "ice",
-            "psychic"
-        ],
+        "ice",
+        "psychic",
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/124.png"
     ],
     [
@@ -1300,9 +1120,8 @@
         "electabuzz",
         1,
         "kanto",
-        [
-            "electric"
-        ],
+        "electric",
+        null,
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/125.png"
     ],
     [
@@ -1310,9 +1129,8 @@
         "magmar",
         1,
         "kanto",
-        [
-            "fire"
-        ],
+        "fire",
+        null,
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/126.png"
     ],
     [
@@ -1320,9 +1138,8 @@
         "pinsir",
         1,
         "kanto",
-        [
-            "bug"
-        ],
+        "bug",
+        null,
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/127.png"
     ],
     [
@@ -1330,9 +1147,8 @@
         "tauros",
         1,
         "kanto",
-        [
-            "normal"
-        ],
+        "normal",
+        null,
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/128.png"
     ],
     [
@@ -1340,9 +1156,8 @@
         "magikarp",
         1,
         "kanto",
-        [
-            "water"
-        ],
+        "water",
+        null,
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/129.png"
     ],
     [
@@ -1350,10 +1165,8 @@
         "gyarados",
         1,
         "kanto",
-        [
-            "water",
-            "flying"
-        ],
+        "water",
+        "flying",
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/130.png"
     ],
     [
@@ -1361,10 +1174,8 @@
         "lapras",
         1,
         "kanto",
-        [
-            "water",
-            "ice"
-        ],
+        "water",
+        "ice",
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/131.png"
     ],
     [
@@ -1372,9 +1183,8 @@
         "ditto",
         1,
         "kanto",
-        [
-            "normal"
-        ],
+        "normal",
+        null,
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/132.png"
     ],
     [
@@ -1382,9 +1192,8 @@
         "eevee",
         1,
         "kanto",
-        [
-            "normal"
-        ],
+        "normal",
+        null,
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/133.png"
     ],
     [
@@ -1392,9 +1201,8 @@
         "vaporeon",
         1,
         "kanto",
-        [
-            "water"
-        ],
+        "water",
+        null,
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/134.png"
     ],
     [
@@ -1402,9 +1210,8 @@
         "jolteon",
         1,
         "kanto",
-        [
-            "electric"
-        ],
+        "electric",
+        null,
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/135.png"
     ],
     [
@@ -1412,9 +1219,8 @@
         "flareon",
         1,
         "kanto",
-        [
-            "fire"
-        ],
+        "fire",
+        null,
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/136.png"
     ],
     [
@@ -1422,9 +1228,8 @@
         "porygon",
         1,
         "kanto",
-        [
-            "normal"
-        ],
+        "normal",
+        null,
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/137.png"
     ],
     [
@@ -1432,10 +1237,8 @@
         "omanyte",
         1,
         "kanto",
-        [
-            "rock",
-            "water"
-        ],
+        "rock",
+        "water",
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/138.png"
     ],
     [
@@ -1443,10 +1246,8 @@
         "omastar",
         1,
         "kanto",
-        [
-            "rock",
-            "water"
-        ],
+        "rock",
+        "water",
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/139.png"
     ],
     [
@@ -1454,10 +1255,8 @@
         "kabuto",
         1,
         "kanto",
-        [
-            "rock",
-            "water"
-        ],
+        "rock",
+        "water",
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/140.png"
     ],
     [
@@ -1465,10 +1264,8 @@
         "kabutops",
         1,
         "kanto",
-        [
-            "rock",
-            "water"
-        ],
+        "rock",
+        "water",
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/141.png"
     ],
     [
@@ -1476,10 +1273,8 @@
         "aerodactyl",
         1,
         "kanto",
-        [
-            "rock",
-            "flying"
-        ],
+        "rock",
+        "flying",
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/142.png"
     ],
     [
@@ -1487,9 +1282,8 @@
         "snorlax",
         1,
         "kanto",
-        [
-            "normal"
-        ],
+        "normal",
+        null,
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/143.png"
     ],
     [
@@ -1497,10 +1291,8 @@
         "articuno",
         1,
         "kanto",
-        [
-            "ice",
-            "flying"
-        ],
+        "ice",
+        "flying",
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/144.png"
     ],
     [
@@ -1508,10 +1300,8 @@
         "zapdos",
         1,
         "kanto",
-        [
-            "electric",
-            "flying"
-        ],
+        "electric",
+        "flying",
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/145.png"
     ],
     [
@@ -1519,10 +1309,8 @@
         "moltres",
         1,
         "kanto",
-        [
-            "fire",
-            "flying"
-        ],
+        "fire",
+        "flying",
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/146.png"
     ],
     [
@@ -1530,9 +1318,8 @@
         "dratini",
         1,
         "kanto",
-        [
-            "dragon"
-        ],
+        "dragon",
+        null,
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/147.png"
     ],
     [
@@ -1540,9 +1327,8 @@
         "dragonair",
         1,
         "kanto",
-        [
-            "dragon"
-        ],
+        "dragon",
+        null,
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/148.png"
     ],
     [
@@ -1550,10 +1336,8 @@
         "dragonite",
         1,
         "kanto",
-        [
-            "dragon",
-            "flying"
-        ],
+        "dragon",
+        "flying",
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/149.png"
     ],
     [
@@ -1561,9 +1345,8 @@
         "mewtwo",
         1,
         "kanto",
-        [
-            "psychic"
-        ],
+        "psychic",
+        null,
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/150.png"
     ],
     [
@@ -1571,9 +1354,8 @@
         "mew",
         1,
         "kanto",
-        [
-            "psychic"
-        ],
+        "psychic",
+        null,
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/151.png"
     ]
 ]

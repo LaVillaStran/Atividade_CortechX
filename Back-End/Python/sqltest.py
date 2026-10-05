@@ -23,28 +23,18 @@ def criação_implementacao(): ## Criação do Banco de dados ou implementação
             nome TEXT,
             geracao INTEGER,
             regiao TEXT,
-            tipo TEXT,
+            tipo_1 TEXT,
+            tipo_2 TEXT,
             sprite TEXT
 
         )
 
     """) ## Criamos as colunas com as informações dentro do JSON
 
-    dados_para_inserir = [] ## precisei fazer isso para conseguir fazer com que tenhamos as informações dos tipos
-                            ## e também guardaremos as outras informações
-
-    for pokemon in lista_de_tuplas:
-
-        linha = list(pokemon)
-
-        linha[4] = json.dumps(linha[4], ensure_ascii=False) ## Como temos uma lista, precisamos fazer isso para
-                                                            ## manipularmos as strings dentro dela
-
-        dados_para_inserir.append(linha)
 
     cursor.executemany(
          
-            "INSERT INTO pokemons (id, nome, geracao, regiao, tipo, sprite) VALUES(?,?,?,?,?,?)", dados_para_inserir ## Aqui efetivamente inserimos os dados
+            "INSERT INTO pokemons (id, nome, geracao, regiao, tipo_1,tipo_2, sprite) VALUES(?,?,?,?,?,?,?)", lista_de_tuplas ## Aqui efetivamente inserimos os dados
 
     )
 
@@ -61,13 +51,15 @@ def conexao(id):
 
     cursor.execute("SELECT * FROM pokemons") ## pegamos as inforamções do BD
 
-    for id, nome, geracao, regiao, tipo, sprite in cursor.fetchall(): ## Mostramos as informações
+    for id, nome, geracao, regiao, tipo_1, tipo_2, sprite in cursor.fetchall(): ## Mostramos as informações
 
         print(f"ID: {id} | Nome: {nome}\n")
 
         print(f"Geração: {geracao} | Região: {regiao}\n")
 
-        print(f"Tipos: {json.loads(tipo)}\n")
+        print(f"Tipos 1: {tipo_1}\n")
+
+        print(f"Tipos 2: {tipo_2}\n")
 
         print(f"Sprites: {sprite}\n")
 
@@ -83,4 +75,4 @@ def conexao(id):
 ## print(df)
 
 # Para ver o BD em si 
-## conexao(NOME_BANCO)
+conexao(NOME_BANCO)
