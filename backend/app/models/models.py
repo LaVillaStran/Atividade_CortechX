@@ -3,7 +3,7 @@ from typing import List
 
 from sqlalchemy import Column, Integer, String
 
-from .database import Base
+from ..database import Base
 
 """
 O QUE É O ORM?
@@ -36,8 +36,8 @@ class PokemonDB(Base):
     
     # nullable=False: significa basicamente que este campo é obrigatório
     nome = Column(String, nullable=False, index=True)
-    geracao = Column(Integer, nullable=False, index=True)
-    regiao = Column(String, nullable=False, index=True)
+    geracao = Column(Integer, nullable=False)
+    regiao = Column(String, nullable=False)
     
     # os tipos de pokemons tiveram algumas reformulações e fizemos a criação,
     # de duas colunas contendo os tipos de um pokemon
