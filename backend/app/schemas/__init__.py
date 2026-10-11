@@ -1,1 +1,1 @@
-from .schemas import PokemonBase, PokemonCreate, PokemonOut
+from .schemas import PokemonBase, PokemonCreate, PokemonOut, Equipe, EquipeCreate, EquipeOut, EquipeDetalhe

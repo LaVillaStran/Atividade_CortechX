@@ -1,1 +1,1 @@
-from .models import PokemonDB
+from .models import PokemonDB, EquipeDB
