@@ -5,7 +5,7 @@ from ..database import Base, SessionLocal, engine
 from ..models.models import PokemonDB
 
 # achar a pasta raiz independete da maquina
-ARQUIVO_JSON = Path(__file__).resolve().parents[2] / "BancoDeDados/Lista_pokemons.json"
+ARQUIVO_JSON = Path(__file__).resolve().parents[2] / "data" / "Lista_pokemons.json"
 
 
 def popular():
