@@ -113,3 +113,45 @@ def deletar_equipe(equipe_id: int, db_eq: Session = Depends(get_db_equipes)):
     db_eq.delete(equipe)
     db_eq.commit()
     return None
+
+# rotas p mexer em um pokemon so, sem precisar mandar os 6 slots (usadas pelo botao "+ EQUIPE")
+@router.post("/{equipe_id}/pokemons/{pokemon_id}", response_model=schemas.EquipeOut)
+def adicionar_pokemon(
+    equipe_id: int,
+    pokemon_id: int,
+    db_eq: Session = Depends(get_db_equipes),
+    db_pokemons: Session = Depends(get_db),
+):
+    equipe = db_eq.get(models.EquipeDB, equipe_id)
+    if not equipe:
+        raise HTTPException(status_code=404, detail="Equipe não encontrada.")
+    if not db_pokemons.get(models.PokemonDB, pokemon_id):
+        raise HTTPException(status_code=404, detail="Pokémon não encontrado.")
+
+    slots = [getattr(equipe, s) for s in SLOTS]
+    if pokemon_id in slots:
+        raise HTTPException(status_code=409, detail="Esse pokémon já está na equipe.")
+    if None not in slots:
+        raise HTTPException(status_code=409, detail="A equipe já tem 6 pokémons.")
+
+    # entra no primeiro slot vazio
+    setattr(equipe, SLOTS[slots.index(None)], pokemon_id)
+    db_eq.commit()
+    db_eq.refresh(equipe)
+    return equipe
+
+
+@router.delete("/{equipe_id}/pokemons/{pokemon_id}", response_model=schemas.EquipeOut)
+def remover_pokemon(equipe_id: int, pokemon_id: int, db_eq: Session = Depends(get_db_equipes)):
+    equipe = db_eq.get(models.EquipeDB, equipe_id)
+    if not equipe:
+        raise HTTPException(status_code=404, detail="Equipe não encontrada.")
+
+    slot = next((s for s in SLOTS if getattr(equipe, s) == pokemon_id), None)
+    if slot is None:
+        raise HTTPException(status_code=404, detail="Esse pokémon não está na equipe.")
+
+    setattr(equipe, slot, None)
+    db_eq.commit()
+    db_eq.refresh(equipe)
+    return equipe
