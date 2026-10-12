@@ -51,7 +51,7 @@ As rotas ficam em `app/routers/pokemons.py` e `app/routers/equipe.py`.
 | GET    | `/pokemons/{pokemon_id}` | Busca um pokémon pelo ID                         |
 | POST   | `/pokemons/`             | Cadastra um novo pokémon                         |
 | PUT    | `/pokemons/{pokemon_id}` | Atualiza os dados de um pokémon (o id não muda)  |
-| DELETE | `/pokemons/{pokemon_id}` | Deleta um pokémon e tira ele das equipes         |
+| DELETE | `/pokemons/{pokemon_id}` | Deleta um pokémon criado e tira ele das equipes  |
 
 Exemplo de corpo JSON no POST (no PUT é igual, só que sem o `id`):
 
@@ -72,6 +72,7 @@ Regras:
 - `geracao` vai de 1 a 9
 - `tipo_2` é opcional e não pode ser igual ao `tipo_1`
 - não pode ter dois pokémons com o mesmo nome nem com o mesmo id
+- os 151 originais (1ª geração) não podem ser deletados, só os criados (id acima de 151)
 
 #### Equipes
 
