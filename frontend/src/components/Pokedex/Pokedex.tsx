@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { PokemonCard } from "../PokemonCard/PokemonCard";
 import { EditCard } from "../EditCard/EditCard";
 import { EscolherEquipe } from "../EscolherEquipe/EscolherEquipe";
-import { API_URL, mensagemDeErro } from "../../api";
+import { API_URL, TIPOS, REGIOES, mensagemDeErro } from "../../api";
 import './Pokedex.css'
 
 interface Pokemon {
@@ -28,6 +28,11 @@ export const Pokedex = () => {
     // pokemon que abriu a janela de escolher equipe (botao "+ EQUIPE")
     const [teamPokemonId, setTeamPokemonId] = useState<number | null>(null);
 
+    // filtros da busca
+    const [busca, setBusca] = useState<string>('');
+    const [filtroTipo, setFiltroTipo] = useState<string>('');
+    const [filtroRegiao, setFiltroRegiao] = useState<string>('');
+
     const DeletePokemon = (id : number) => {
         const pokemon = pokemons.find(p => p.id === id);
         if (!window.confirm(`Deletar ${pokemon?.nome.toUpperCase() ?? 'o pokémon'}? Ele também sai das equipes.`)) {
@@ -41,9 +46,6 @@ export const Pokedex = () => {
             if (response.ok) {
                 setErro('');
                 setPokemons((prevPokemons) => prevPokemons.filter(p => p.id !== id));
-                // se apagou o ultimo da ultima pagina, volta uma pagina em vez de mostrar a pagina vazia
-                const paginas = Math.max(1, Math.ceil((pokemons.length - 1) / itemsPerPage));
-                setCurrentPage((pagina) => Math.min(pagina, paginas));
             } else {
                 setErro(await mensagemDeErro(response));
             }
@@ -72,22 +74,46 @@ export const Pokedex = () => {
         return <p>Carregando Pokédex...</p>
     }
 
-    const indexLastItem = currentPage * itemsPerPage;
-    const indexFirstItem = indexLastItem - itemsPerPage;
-    const currentPokemons = pokemons.slice(indexFirstItem, indexLastItem);
+    // busca por parte do nome ou pelo numero exato, junto com os filtros de tipo e regiao
+    const termo = busca.trim().toLowerCase().replace('#', '');
+    const filtrados = pokemons.filter((p) =>
+        (!termo || p.nome.includes(termo) || String(p.id) === termo) &&
+        (!filtroTipo || p.tipo_1 === filtroTipo || p.tipo_2 === filtroTipo) &&
+        (!filtroRegiao || p.regiao === filtroRegiao)
+    );
+    const temFiltro = Boolean(termo || filtroTipo || filtroRegiao);
 
-    const totalPages = Math.max(1, Math.ceil(pokemons.length / itemsPerPage));
+    const totalPages = Math.max(1, Math.ceil(filtrados.length / itemsPerPage));
+    // se a lista diminuiu (filtro ou delete), nao deixa ficar numa pagina que nao existe mais
+    const pagina = Math.min(currentPage, totalPages);
+
+    const indexLastItem = pagina * itemsPerPage;
+    const indexFirstItem = indexLastItem - itemsPerPage;
+    const currentPokemons = filtrados.slice(indexFirstItem, indexLastItem);
+
+    // qualquer mudanca nos filtros volta para a pagina 1
+    const mudarFiltro = (setter : (valor : string) => void, valor : string) => {
+        setter(valor);
+        setCurrentPage(1);
+    };
+
+    const limparFiltros = () => {
+        setBusca('');
+        setFiltroTipo('');
+        setFiltroRegiao('');
+        setCurrentPage(1);
+    };
 
     const nextPage = () => {
-        if (currentPage < totalPages) {
-            setCurrentPage(currentPage + 1);
+        if (pagina < totalPages) {
+            setCurrentPage(pagina + 1);
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
     };
 
     const previousPage = () => {
-        if (currentPage > 1) {
-            setCurrentPage(currentPage - 1);
+        if (pagina > 1) {
+            setCurrentPage(pagina - 1);
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
     }
@@ -126,6 +152,47 @@ export const Pokedex = () => {
                     />
                 ) : (
                     <>
+                        <div className='search-bar'>
+                            <input
+                                className='search-input'
+                                type="text"
+                                placeholder="BUSCAR POR NOME OU NÚMERO"
+                                value={busca}
+                                onChange={(e) => mudarFiltro(setBusca, e.target.value)}
+                            />
+                            <select
+                                className='search-select'
+                                value={filtroTipo}
+                                onChange={(e) => mudarFiltro(setFiltroTipo, e.target.value)}
+                            >
+                                <option value="">TODOS OS TIPOS</option>
+                                {TIPOS.map((tipo) => (
+                                    <option key={tipo} value={tipo}>{tipo.toUpperCase()}</option>
+                                ))}
+                            </select>
+                            <select
+                                className='search-select'
+                                value={filtroRegiao}
+                                onChange={(e) => mudarFiltro(setFiltroRegiao, e.target.value)}
+                            >
+                                <option value="">TODAS AS REGIÕES</option>
+                                {REGIOES.map((regiao) => (
+                                    <option key={regiao} value={regiao}>{regiao.toUpperCase()}</option>
+                                ))}
+                            </select>
+                            <button className='search-clear' onClick={limparFiltros} disabled={!temFiltro}>
+                                LIMPAR
+                            </button>
+                        </div>
+
+                        {temFiltro && (
+                            <div className='search-count'>
+                                {filtrados.length === 0
+                                    ? 'NENHUM POKÉMON ENCONTRADO'
+                                    : `${filtrados.length} POKÉMON${filtrados.length > 1 ? 'S' : ''} ENCONTRADO${filtrados.length > 1 ? 'S' : ''}`}
+                            </div>
+                        )}
+
                         <div className='grid'>
                             {currentPokemons.map((pokemon) => (
                                 <PokemonCard 
@@ -149,19 +216,19 @@ export const Pokedex = () => {
                                 <button 
                                     className="btn-previous"
                                     onClick={previousPage}
-                                    disabled={currentPage === 1}
+                                    disabled={pagina === 1}
                                 >
                                     PREVIOUS
                                 </button>
                             </div>
                         
-                            <span className="current-page">PÁGINA {currentPage} DE {totalPages}</span>
+                            <span className="current-page">PÁGINA {pagina} DE {totalPages}</span>
 
                             <div className="btn-page">
                                 <button 
                                     className="btn-next"
                                     onClick={nextPage}
-                                    disabled={currentPage >= totalPages}
+                                    disabled={pagina >= totalPages}
                                 >
                                     NEXT
                                 </button>
