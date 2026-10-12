@@ -1,5 +1,5 @@
 from typing import List, Literal, Optional
-from pydantic import BaseModel, Field, field_validator
+from pydantic import BaseModel, Field, field_validator, model_validator
 
 """
 O QUE É O SCHEMAS E O PYDANTIC?
@@ -57,6 +57,13 @@ class PokemonBase(BaseModel):
         if isinstance(valor, str) and not valor.strip():
             return None
         return valor
+
+    # o segundo tipo nao pode repetir o primeiro (ex.: fire/fire)
+    @model_validator(mode="after")
+    def tipos_diferentes(self):
+        if self.tipo_2 is not None and self.tipo_2 == self.tipo_1:
+            raise ValueError("tipo_2 não pode ser igual ao tipo_1")
+        return self
 
 
 class PokemonCreate(PokemonBase):
