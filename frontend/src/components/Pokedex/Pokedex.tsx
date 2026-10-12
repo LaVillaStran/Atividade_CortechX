@@ -88,6 +88,10 @@ export const Pokedex = () => {
                         type_2={pokemonToEdit.tipo_2}
                         img={pokemonToEdit.sprite}
                         onCancel={() => setEditPokemonId(null)}
+                        onSave={(atualizado) => {
+                            setPokemons((prev) => prev.map(p => p.id === atualizado.id ? atualizado : p));
+                            setEditPokemonId(null);
+                        }}
                     />
                 ) : (
                     <>

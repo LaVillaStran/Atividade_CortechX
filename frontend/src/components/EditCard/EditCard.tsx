@@ -1,6 +1,16 @@
 import { useState } from "react"
 import './Editcard.css'
-import { API_URL } from '../../api'
+import { API_URL, TIPOS, REGIOES, mensagemDeErro } from '../../api'
+
+export interface IPokemonAtualizado {
+    id : number,
+    nome : string,
+    geracao : number,
+    regiao : string,
+    tipo_1 : string,
+    tipo_2? : string,
+    sprite : string,
+}
 
 interface IEditCardProps {
     id_pokemon : number,
@@ -11,6 +21,7 @@ interface IEditCardProps {
     type_2? : string,
     img : string,
     onCancel: () => void;
+    onSave: (pokemon : IPokemonAtualizado) => void;
 }
 
 export const EditCard = (props : IEditCardProps) => {
@@ -20,6 +31,13 @@ export const EditCard = (props : IEditCardProps) => {
     const [region, setRegion] = useState<string>(props.region);
     const [sprite, setSprite] = useState<string>(props.img);
     const [generation, setGeneration] = useState<number>(props.generation);
+    const [erro, setErro] = useState<string>('');
+
+    // o tipo 2 nao pode ser igual ao tipo 1: se o tipo 1 mudar para o mesmo valor, o tipo 2 volta para "nenhum"
+    const changeType1 = (valor : string) => {
+        setType1(valor);
+        if (valor === type2) setType2('');
+    };
 
     const EditPokemonAPI = () => {
         const updatedPokemon = {
@@ -38,16 +56,15 @@ export const EditCard = (props : IEditCardProps) => {
             },
             body: JSON.stringify(updatedPokemon),
         })
-        .then((response) => {
+        .then(async (response) => {
             if (response.ok) {
-                console.log("Pokémon atualizado com sucesso!");
-                props.onCancel();
-                window.location.reload();
+                // atualiza so esse pokemon na lista, sem recarregar a pagina
+                props.onSave(await response.json());
             } else {
-                console.error("Erro ao atualizar o Pokémon");
+                setErro(await mensagemDeErro(response));
             }
         })
-        .catch((error) => console.error("Erro na requisição PUT:", error));
+        .catch(() => setErro("Não foi possível conectar com a API."));
     };
 
     return (
@@ -65,6 +82,7 @@ export const EditCard = (props : IEditCardProps) => {
                 <input 
                     className='input-name' 
                     type="text"
+                    value={name}
                     onChange={(e) => setName(e.target.value)}
                 />
             </div>
@@ -75,14 +93,11 @@ export const EditCard = (props : IEditCardProps) => {
                     <select 
                         className="retro-select" 
                         value={type1} 
-                        onChange={(e) => setType1(e.target.value)}
+                        onChange={(e) => changeType1(e.target.value)}
                     >
-                        <option value="WATER">WATER</option>
-                        <option value="FIRE">FIRE</option>
-                        <option value="GRASS">GRASS</option>
-                        <option value="ELECTRIC">ELECTRIC</option>
-                        <option value="ICE">ICE</option>
-                        <option value="GHOST">GHOST</option>
+                        {TIPOS.map((tipo) => (
+                            <option key={tipo} value={tipo}>{tipo.toUpperCase()}</option>
+                        ))}
                     </select>
                 </div>
 
@@ -94,12 +109,9 @@ export const EditCard = (props : IEditCardProps) => {
                         onChange={(e) => setType2(e.target.value)}
                     >
                         <option value="">NENHUM</option>
-                        <option value="WATER">WATER</option>
-                        <option value="FIRE">FIRE</option>
-                        <option value="GRASS">GRASS</option>
-                        <option value="ELECTRIC">ELECTRIC</option>
-                        <option value="ICE">ICE</option>
-                        <option value="GHOST">GHOST</option>
+                        {TIPOS.filter((tipo) => tipo !== type1).map((tipo) => (
+                            <option key={tipo} value={tipo}>{tipo.toUpperCase()}</option>
+                        ))}
                     </select>
                 </div>
             </div>
@@ -112,9 +124,9 @@ export const EditCard = (props : IEditCardProps) => {
                         value={region} 
                         onChange={(e) => setRegion(e.target.value)}
                     >
-                        <option value="KANTO">KANTO</option>
-                        <option value="JOHTO">JOHTO</option>
-                        <option value="HOENN">HOENN</option>
+                        {REGIOES.map((regiao) => (
+                            <option key={regiao} value={regiao}>{regiao.toUpperCase()}</option>
+                        ))}
                     </select>
                 </div>
             </div>
@@ -127,9 +139,9 @@ export const EditCard = (props : IEditCardProps) => {
                         value={generation} 
                         onChange={(e) => setGeneration(Number(e.target.value))}
                     >
-                        <option value={1}>1ª</option>
-                        <option value={2}>2ª</option>
-                        <option value={3}>3ª</option>
+                        {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((geracao) => (
+                            <option key={geracao} value={geracao}>{geracao}ª</option>
+                        ))}
                     </select>
                 </div>
             </div>
@@ -139,9 +151,12 @@ export const EditCard = (props : IEditCardProps) => {
                 <input 
                     className='input-sprite' 
                     type="text" 
+                    value={sprite}
                     onChange={(e) => setSprite(e.target.value)}
                 />
             </div>
+
+            {erro && <div className='edit-error'>{erro}</div>}
 
             <div className="footer-edit">
                 <button type="button" className="btn save-changes" onClick={EditPokemonAPI}>

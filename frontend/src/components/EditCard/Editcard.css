@@ -176,3 +176,18 @@ label {
     transform: translateY(2px);
     box-shadow: 0 0 0 #282C1E;
 }
+.edit-error {
+    background-color: #D9534F;
+    color: #FFF;
+    border: 2px solid #282C1E;
+    border-radius: 3px;
+    padding: 6px;
+    font-size: 10px;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* url diferencia maiuscula de minuscula, entao mostra como foi digitada */
+.input-sprite {
+    text-transform: none;
+}
