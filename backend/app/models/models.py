@@ -1,8 +1,9 @@
 import json
 from typing import List
 
-from sqlalchemy import Column, Integer, String, ForeignKey
+from sqlalchemy import Column, Integer, String
 from app.database.database_pokemons import Base
+from app.database.database_equipes import BaseEquipes
 
 """
 O QUE É O ORM?
@@ -51,21 +52,24 @@ class PokemonDB(Base):
     # a gnt vai aceitar que seja nulo (opcional) p evitar quebrar a API
     sprite = Column(String, nullable=True)
 
-class EquipeDB(Base):
+# fica no equipes.db, por isso herda de BaseEquipes
+# sem ForeignKey: o SQLite não liga tabelas de arquivos diferentes,
+# a existência dos pokémons é conferida no router (validar_pokemons)
+class EquipeDB(BaseEquipes):
     __tablename__ = "Equipe"
 
     id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     
     nome_treinador = Column(String,nullable=False)
  
-    pokemon_1 = Column(Integer,ForeignKey("pokemons.id"),nullable=True)
+    pokemon_1 = Column(Integer,nullable=True)
 
-    pokemon_2 = Column(Integer,ForeignKey("pokemons.id"),nullable=True)
+    pokemon_2 = Column(Integer,nullable=True)
 
-    pokemon_3 = Column(Integer,ForeignKey("pokemons.id"),nullable=True)
+    pokemon_3 = Column(Integer,nullable=True)
 
-    pokemon_4 = Column(Integer,ForeignKey("pokemons.id"),nullable=True)
+    pokemon_4 = Column(Integer,nullable=True)
 
-    pokemon_5 = Column(Integer,ForeignKey("pokemons.id"),nullable=True)
+    pokemon_5 = Column(Integer,nullable=True)
 
-    pokemon_6 = Column(Integer,ForeignKey("pokemons.id"),nullable=True)
+    pokemon_6 = Column(Integer,nullable=True)
