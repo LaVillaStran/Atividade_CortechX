@@ -72,3 +72,13 @@
     font-weight: bold;
     text-align: center;
 }
+.pokedex-error {
+    background-color: #D9534F;
+    color: #FFF;
+    border: 2px solid #282C1E;
+    border-radius: 4px;
+    padding: 8px;
+    margin-bottom: 15px;
+    font-size: 10px;
+    text-align: center;
+}

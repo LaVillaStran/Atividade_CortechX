@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { PokemonCard } from "../PokemonCard/PokemonCard";
 import { EditCard } from "../EditCard/EditCard";
-import { API_URL } from "../../api";
+import { API_URL, mensagemDeErro } from "../../api";
 import './Pokedex.css'
 
 interface Pokemon {
@@ -22,18 +22,29 @@ export const Pokedex = () => {
     const itemsPerPage = 30;
 
     const [editPokemonId, setEditPokemonId] = useState<number | null>(null);
+    const [erro, setErro] = useState<string>('');
 
     const DeletePokemon = (id : number) => {
+        const pokemon = pokemons.find(p => p.id === id);
+        if (!window.confirm(`Deletar ${pokemon?.nome.toUpperCase() ?? 'o pokémon'}? Ele também sai das equipes.`)) {
+            return;
+        }
+
         fetch(`${API_URL}/pokemons/${id}`, {
             method: 'DELETE',
         })
-        .then((response) => {
+        .then(async (response) => {
             if (response.ok) {
-                console.log("Pokémon deletado com sucesso");
+                setErro('');
                 setPokemons((prevPokemons) => prevPokemons.filter(p => p.id !== id));
+                // se apagou o ultimo da ultima pagina, volta uma pagina em vez de mostrar a pagina vazia
+                const paginas = Math.max(1, Math.ceil((pokemons.length - 1) / itemsPerPage));
+                setCurrentPage((pagina) => Math.min(pagina, paginas));
+            } else {
+                setErro(await mensagemDeErro(response));
             }
         })
-        .catch((error) => console.log("Não foi possível deletar o pokémon", error));
+        .catch(() => setErro("Não foi possível conectar com a API."));
     };
 
     useEffect(() => {
@@ -42,8 +53,8 @@ export const Pokedex = () => {
             setPokemons(data);
             setLoading(false);
         })
-        .catch((error) => {
-            console.error("Erro ao buscar os pokemons", error);
+        .catch(() => {
+            setErro("Não foi possível carregar os pokémons. O backend está rodando?");
             setLoading(false);
         });
     }, []);
@@ -77,6 +88,7 @@ export const Pokedex = () => {
     return (
         <div className='pokedex'>
             <div className='screen'>
+                {erro && <div className='pokedex-error'>{erro}</div>}
                 {editPokemonId && pokemonToEdit ? (
                     <EditCard 
                         key={pokemonToEdit.id}
