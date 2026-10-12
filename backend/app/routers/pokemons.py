@@ -7,6 +7,8 @@ from sqlalchemy.orm import Session
 
 from .. import models, schemas
 from ..database.database_pokemons import get_db
+from ..database.database_equipes import get_db_equipes
+from .equipe import SLOTS
 
 router = APIRouter(
     prefix="/pokemons",
@@ -77,13 +79,24 @@ def atualizar_pokemon(pokemon_id: int, pokemon_atualizado: schemas.PokemonUpdate
 
 # delete pikemons - deleta um pikemon do banco
 @router.delete("/{pokemon_id}", status_code=204)
-def deletar_pokemon(pokemon_id: int, db: Session = Depends(get_db)):
+def deletar_pokemon(
+    pokemon_id: int,
+    db: Session = Depends(get_db),
+    db_eq: Session = Depends(get_db_equipes),
+):
     pokemon_db = db.get(models.PokemonDB, pokemon_id)
     if not pokemon_db:
         raise HTTPException(status_code=404, detail="Pokémon não encontrado.")
     
     db.delete(pokemon_db)
     db.commit()
+
+    # tira o pikemon das equipes (ficam em outro banco, entao nao tem ForeignKey p fazer isso sozinho)
+    for equipe in db_eq.query(models.EquipeDB).all():
+        for slot in SLOTS:
+            if getattr(equipe, slot) == pokemon_id:
+                setattr(equipe, slot, None)
+    db_eq.commit()
     return None
 
 # EXTRAS:
