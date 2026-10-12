@@ -101,6 +101,14 @@ class PokemonOut(BaseModel):
 class Equipe(BaseModel):
     nome_treinador: str = Field(...,min_length=1, description="Nome do treinador")
 
+    # tira os espacos das pontas, assim "   " nao passa no min_length
+    @field_validator("nome_treinador", mode="before")
+    @classmethod
+    def limpar_nome(cls, valor):
+        if isinstance(valor, str):
+            return valor.strip()
+        return valor
+
     pokemon_1: int | None = None
 
     pokemon_2: int | None = None

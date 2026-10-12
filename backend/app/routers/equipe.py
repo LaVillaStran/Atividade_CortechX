@@ -1,6 +1,7 @@
-from typing import List
+from typing import List, Optional
 
 from fastapi import APIRouter, Depends, HTTPException
+from sqlalchemy import func
 from sqlalchemy.orm import Session
 
 from .. import models, schemas
@@ -27,6 +28,15 @@ def validar_pokemons(equipe: schemas.EquipeCreate, db_pokemons: Session):
         pid = getattr(equipe, slot)
         if pid is not None and not db_pokemons.get(models.PokemonDB, pid):
             raise HTTPException(status_code=404, detail=f"Pokémon {pid} ({slot}) não existe.")
+
+
+def verificar_treinador(nome: str, db_eq: Session, ignorar_id: Optional[int] = None):
+    # cada treinador tem uma equipe so, sem diferenciar maiuscula de minuscula
+    consulta = db_eq.query(models.EquipeDB).filter(func.lower(models.EquipeDB.nome_treinador) == nome.lower())
+    if ignorar_id is not None:
+        consulta = consulta.filter(models.EquipeDB.id != ignorar_id)
+    if consulta.first():
+        raise HTTPException(status_code=409, detail="Já existe uma equipe com esse treinador.")
 
 
 @router.get("/", response_model=List[schemas.EquipeOut])
@@ -66,6 +76,7 @@ def criar_equipe(
     db_pokemons: Session = Depends(get_db),
 ):
     validar_pokemons(equipe, db_pokemons)
+    verificar_treinador(equipe.nome_treinador, db_eq)
     nova = models.EquipeDB(**equipe.model_dump())
     db_eq.add(nova)
     db_eq.commit()
@@ -85,6 +96,7 @@ def atualizar_equipe(
         raise HTTPException(status_code=404, detail="Equipe não encontrada.")
 
     validar_pokemons(dados, db_pokemons)
+    verificar_treinador(dados.nome_treinador, db_eq, ignorar_id=equipe_id)
     for key, value in dados.model_dump().items():
         setattr(equipe, key, value)
 
