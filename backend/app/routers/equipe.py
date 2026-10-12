@@ -1,6 +1,7 @@
-from typing import List
+from typing import List, Optional
 
 from fastapi import APIRouter, Depends, HTTPException
+from sqlalchemy import func
 from sqlalchemy.orm import Session
 
 from .. import models, schemas
@@ -16,12 +17,26 @@ SLOTS = ["pokemon_1", "pokemon_2", "pokemon_3", "pokemon_4", "pokemon_5", "pokem
 
 
 def validar_pokemons(equipe: schemas.EquipeCreate, db_pokemons: Session):
+    # não deixa o mesmo pokémon em mais de um slot
+    ids = [getattr(equipe, slot) for slot in SLOTS if getattr(equipe, slot) is not None]
+    if len(ids) != len(set(ids)):
+        raise HTTPException(status_code=422, detail="A equipe não pode ter pokémon repetido.")
+
     # confere no pokemons.db se cada id enviado existe
     for slot in SLOTS:
         # Aqui faremos uma busca pelos 
         pid = getattr(equipe, slot)
         if pid is not None and not db_pokemons.get(models.PokemonDB, pid):
             raise HTTPException(status_code=404, detail=f"Pokémon {pid} ({slot}) não existe.")
+
+
+def verificar_treinador(nome: str, db_eq: Session, ignorar_id: Optional[int] = None):
+    # cada treinador tem uma equipe so, sem diferenciar maiuscula de minuscula
+    consulta = db_eq.query(models.EquipeDB).filter(func.lower(models.EquipeDB.nome_treinador) == nome.lower())
+    if ignorar_id is not None:
+        consulta = consulta.filter(models.EquipeDB.id != ignorar_id)
+    if consulta.first():
+        raise HTTPException(status_code=409, detail="Já existe uma equipe com esse treinador.")
 
 
 @router.get("/", response_model=List[schemas.EquipeOut])
@@ -61,6 +76,7 @@ def criar_equipe(
     db_pokemons: Session = Depends(get_db),
 ):
     validar_pokemons(equipe, db_pokemons)
+    verificar_treinador(equipe.nome_treinador, db_eq)
     nova = models.EquipeDB(**equipe.model_dump())
     db_eq.add(nova)
     db_eq.commit()
@@ -80,6 +96,7 @@ def atualizar_equipe(
         raise HTTPException(status_code=404, detail="Equipe não encontrada.")
 
     validar_pokemons(dados, db_pokemons)
+    verificar_treinador(dados.nome_treinador, db_eq, ignorar_id=equipe_id)
     for key, value in dados.model_dump().items():
         setattr(equipe, key, value)
 
@@ -96,3 +113,45 @@ def deletar_equipe(equipe_id: int, db_eq: Session = Depends(get_db_equipes)):
     db_eq.delete(equipe)
     db_eq.commit()
     return None
+
+# rotas p mexer em um pokemon so, sem precisar mandar os 6 slots (usadas pelo botao "+ EQUIPE")
+@router.post("/{equipe_id}/pokemons/{pokemon_id}", response_model=schemas.EquipeOut)
+def adicionar_pokemon(
+    equipe_id: int,
+    pokemon_id: int,
+    db_eq: Session = Depends(get_db_equipes),
+    db_pokemons: Session = Depends(get_db),
+):
+    equipe = db_eq.get(models.EquipeDB, equipe_id)
+    if not equipe:
+        raise HTTPException(status_code=404, detail="Equipe não encontrada.")
+    if not db_pokemons.get(models.PokemonDB, pokemon_id):
+        raise HTTPException(status_code=404, detail="Pokémon não encontrado.")
+
+    slots = [getattr(equipe, s) for s in SLOTS]
+    if pokemon_id in slots:
+        raise HTTPException(status_code=409, detail="Esse pokémon já está na equipe.")
+    if None not in slots:
+        raise HTTPException(status_code=409, detail="A equipe já tem 6 pokémons.")
+
+    # entra no primeiro slot vazio
+    setattr(equipe, SLOTS[slots.index(None)], pokemon_id)
+    db_eq.commit()
+    db_eq.refresh(equipe)
+    return equipe
+
+
+@router.delete("/{equipe_id}/pokemons/{pokemon_id}", response_model=schemas.EquipeOut)
+def remover_pokemon(equipe_id: int, pokemon_id: int, db_eq: Session = Depends(get_db_equipes)):
+    equipe = db_eq.get(models.EquipeDB, equipe_id)
+    if not equipe:
+        raise HTTPException(status_code=404, detail="Equipe não encontrada.")
+
+    slot = next((s for s in SLOTS if getattr(equipe, s) == pokemon_id), None)
+    if slot is None:
+        raise HTTPException(status_code=404, detail="Esse pokémon não está na equipe.")
+
+    setattr(equipe, slot, None)
+    db_eq.commit()
+    db_eq.refresh(equipe)
+    return equipe

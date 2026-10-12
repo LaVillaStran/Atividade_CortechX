@@ -1,0 +1,130 @@
+/* fundo escuro por cima da Pokédex */
+.choose-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+
+/* mesma cara da tela de edição */
+.choose-box {
+    width: 380px;
+    max-height: 80vh;
+    background-color: #BACDB0;
+    border: 3px solid #282C1E;
+    border-radius: 8px;
+    box-shadow: 6px 6px 0 #282C1E;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    color: #282C1E;
+}
+
+.choose-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 12px;
+    font-weight: bold;
+    border-bottom: 2px dashed #282C1E;
+    padding-bottom: 10px;
+}
+
+.choose-img {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+    image-rendering: pixelated;
+    background-color: #A4B598;
+    border: 2px solid #282C1E;
+    border-radius: 4px;
+    flex-shrink: 0;
+}
+
+.choose-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    overflow-y: auto;
+}
+
+.choose-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #C4CE9E;
+    border: 2px solid #282C1E;
+    border-radius: 4px;
+    box-shadow: 2px 2px 0 #282C1E;
+    padding: 9px;
+    font-size: 11px;
+    font-weight: bold;
+    color: #282C1E;
+    cursor: pointer;
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.choose-item:hover:not(:disabled) {
+    background-color: #F0AD4E;
+}
+
+.choose-item:active:not(:disabled) {
+    transform: translateY(2px);
+    box-shadow: 0 0 0 #282C1E;
+}
+
+.choose-item:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.choose-status {
+    font-size: 10px;
+}
+
+.choose-empty {
+    font-size: 11px;
+    text-align: center;
+    padding: 10px;
+    line-height: 1.6;
+}
+
+.choose-message {
+    border: 2px solid #282C1E;
+    border-radius: 3px;
+    padding: 7px;
+    font-size: 10px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.choose-message.error {
+    background-color: #D9534F;
+    color: #FFF;
+}
+
+.choose-message.success {
+    background-color: #57A845;
+    color: #FFF;
+}
+
+.choose-close {
+    background-color: #D9534F;
+    color: #FFF;
+    border: 2px solid #282C1E;
+    border-radius: 3px;
+    box-shadow: 2px 2px 0 #282C1E;
+    padding: 7px;
+    font-size: 11px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.choose-close:active {
+    transform: translateY(2px);
+    box-shadow: 0 0 0 #282C1E;
+}

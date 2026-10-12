@@ -3,7 +3,7 @@ from pathlib import Path
 from sqlalchemy import create_engine
 from sqlalchemy.orm import declarative_base, sessionmaker
 
-PASTA_DB = Path(__file__).resolve().parents[2] / "BancoDeDados"
+PASTA_DB = Path(__file__).resolve().parents[2] / "data"
 PASTA_DB.mkdir(parents=True, exist_ok=True)
 
 ARQUIVO_DB = PASTA_DB / "equipes.db"

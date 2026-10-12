@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from .database.database_pokemons import Base, engine
 from .database.database_equipes import BaseEquipes, engine_equipes
 from .routers import pokemons,equipe
@@ -13,3 +14,12 @@ app = FastAPI(title="Pokédex API")
 # registro de rotas 
 app.include_router(pokemons.router)
 app.include_router(equipe.router)
+
+# integração com o frontend
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Em produção, podes restringir para o URL exato
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
