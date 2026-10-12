@@ -1,6 +1,3 @@
-import json
-from typing import List
-
 from sqlalchemy import Column, Integer, String
 from app.database.database_pokemons import Base
 from app.database.database_equipes import BaseEquipes
