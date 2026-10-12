@@ -24,9 +24,9 @@ Regiao = Literal[REGIOES]
 
 
 class PokemonBase(BaseModel):
-
-    # gt=0: o id tem q ser maior que zero (greater than)
-    id: int = Field(..., gt=0, description="Número da pokédex")
+    """
+    Campos editaveis do pikemon. O id fica de fora porque nao muda depois de criado.
+    """
 
     # min_length=1: nao aceita pikemon sem nome (nem so com espacos, o validator tira eles antes)
     nome: str = Field(..., min_length=1)
@@ -69,6 +69,16 @@ class PokemonBase(BaseModel):
 class PokemonCreate(PokemonBase):
     """
     Molde para quando alguem criar um pikemon (POST).
+    """
+
+    # gt=0: o id tem q ser maior que zero (greater than)
+    id: int = Field(..., gt=0, description="Número da pokédex")
+
+
+class PokemonUpdate(PokemonBase):
+    """
+    Molde para quando alguem editar um pikemon (PUT). Sem id: trocar o id
+    deixaria as equipes apontando para um pikemon que nao existe mais.
     """
 
 

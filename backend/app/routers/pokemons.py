@@ -47,16 +47,13 @@ def criar_pokemon(pokemon: schemas.PokemonCreate, db: Session = Depends(get_db))
 
 # put pikemons - atualiza um pikemon nn banco
 @router.put("/{pokemon_id}", response_model=schemas.PokemonOut)
-def atualizar_pokemon(pokemon_id: int, pokemon_atualizado: schemas.PokemonCreate, db: Session = Depends(get_db)):
+def atualizar_pokemon(pokemon_id: int, pokemon_atualizado: schemas.PokemonUpdate, db: Session = Depends(get_db)):
     pokemon_db = db.get(models.PokemonDB, pokemon_id)
     # caso o id nao exsta
     if not pokemon_db:
         raise HTTPException(status_code=404, detail="Pokémon não encontrado.")
 
-    # verifica se tentou alterar o id pra um id que ja pertence a um pokemon no banco
-    if pokemon_id != pokemon_atualizado.id and db.get(models.PokemonDB, pokemon_atualizado.id):
-        raise HTTPException(status_code=409, detail="Já existe outro pokémon com esse id.")
-
+    # o id vem so da URL, o corpo nao tem id (ver PokemonUpdate)
     dados = pokemon_atualizado.model_dump()
 
     for key, value in dados.items():
