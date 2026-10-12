@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { PokemonCard } from "../PokemonCard/PokemonCard";
 import { EditCard } from "../EditCard/EditCard";
+import { EscolherEquipe } from "../EscolherEquipe/EscolherEquipe";
 import { API_URL, mensagemDeErro } from "../../api";
 import './Pokedex.css'
 
@@ -23,6 +24,9 @@ export const Pokedex = () => {
 
     const [editPokemonId, setEditPokemonId] = useState<number | null>(null);
     const [erro, setErro] = useState<string>('');
+
+    // pokemon que abriu a janela de escolher equipe (botao "+ EQUIPE")
+    const [teamPokemonId, setTeamPokemonId] = useState<number | null>(null);
 
     const DeletePokemon = (id : number) => {
         const pokemon = pokemons.find(p => p.id === id);
@@ -89,11 +93,20 @@ export const Pokedex = () => {
     }
 
     const pokemonToEdit = pokemons.find(p => p.id === editPokemonId);
+    const pokemonToTeam = pokemons.find(p => p.id === teamPokemonId);
 
     return (
         <div className='pokedex'>
             <div className='screen'>
                 {erro && <div className='pokedex-error'>{erro}</div>}
+                {pokemonToTeam && (
+                    <EscolherEquipe
+                        id_pokemon={pokemonToTeam.id}
+                        name={pokemonToTeam.nome}
+                        img={pokemonToTeam.sprite}
+                        onClose={() => setTeamPokemonId(null)}
+                    />
+                )}
                 {editPokemonId && pokemonToEdit ? (
                     <EditCard 
                         key={pokemonToEdit.id}
@@ -109,6 +122,7 @@ export const Pokedex = () => {
                             setPokemons((prev) => prev.map(p => p.id === atualizado.id ? atualizado : p));
                             setEditPokemonId(null);
                         }}
+                        onAddTeam={(id) => setTeamPokemonId(id)}
                     />
                 ) : (
                     <>
@@ -125,6 +139,7 @@ export const Pokedex = () => {
                                     generation={pokemon.geracao} 
                                     onDelete={DeletePokemon}
                                     onEdit={(id) => setEditPokemonId(id)}
+                                    onAddTeam={(id) => setTeamPokemonId(id)}
                                 />
                             ))}
                         </div>

@@ -22,6 +22,7 @@ interface IEditCardProps {
     img : string | null,
     onCancel: () => void;
     onSave: (pokemon : IPokemonAtualizado) => void;
+    onAddTeam: (id : number) => void;
 }
 
 export const EditCard = (props : IEditCardProps) => {
@@ -168,7 +169,7 @@ export const EditCard = (props : IEditCardProps) => {
                     CANCELAR
                 </button>
 
-                <button className="btn-add">
+                <button type="button" className="btn-add" onClick={() => props.onAddTeam(props.id_pokemon)}>
                     + EQUIPE
                 </button>
             </div>

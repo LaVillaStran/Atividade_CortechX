@@ -10,7 +10,8 @@ interface IPokemonCardProps {
     type_2? : string,
     img : string | null,
     onDelete : (id : number) => void,
-    onEdit : (id : number) => void
+    onEdit : (id : number) => void,
+    onAddTeam : (id : number) => void
 }
 
 export const PokemonCard = (props : IPokemonCardProps) => {
@@ -51,7 +52,7 @@ export const PokemonCard = (props : IPokemonCardProps) => {
             <div className='card-divider'></div>
             
             <div className="card-actions">
-                <button className="btn btn-add">+ EQUIPE</button>
+                <button className="btn btn-add" onClick={() => props.onAddTeam(props.id_pokemon)}>+ EQUIPE</button>
                 <button className="btn btn-delete" onClick={() => props.onDelete(props.id_pokemon)}>
                     DELETAR
                 </button>
