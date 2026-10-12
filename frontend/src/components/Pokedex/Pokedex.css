@@ -147,11 +147,34 @@
     cursor: not-allowed;
 }
 
+.search-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: -5px 0 12px 4px;
+}
+
 .search-count {
     font-size: 11px;
     font-weight: bold;
     color: #282C1E;
-    margin: -5px 0 12px 4px;
+}
+
+/* aparece so no filtro ORIGINAIS, quando tem algum original editado */
+.reset-all {
+    background-color: #BDC89E;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 6px 10px;
+    border: 2px solid #282C1E;
+    border-radius: 4px;
+    cursor: pointer;
+    box-shadow: 0 3px 0 #14160E;
+}
+
+.reset-all:active {
+    transform: translateY(3px);
+    box-shadow: 0 0 0 #14160E;
 }
 
 /* botao de criar pokemon: laranja igual ao EDITAR */

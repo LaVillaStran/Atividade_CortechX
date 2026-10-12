@@ -191,3 +191,10 @@ label {
 .input-sprite {
     text-transform: none;
 }
+
+/* volta o pokemon original para os dados do seed */
+.footer-edit .reset {
+    flex: 1;
+    background-color: #BDC89E;
+    color: #282C1E;
+}

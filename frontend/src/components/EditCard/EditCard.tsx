@@ -10,6 +10,7 @@ export interface IPokemonAtualizado {
     tipo_1 : string,
     tipo_2? : string,
     sprite : string | null,
+    editado? : boolean,
 }
 
 interface IEditCardProps {
@@ -25,6 +26,8 @@ interface IEditCardProps {
     onAddTeam: (id : number) => void;
     // true = formulario de criar (POST), com o numero editavel e sem o "+ EQUIPE"
     novo? : boolean;
+    // true = original que foi alterado: mostra o botao REDEFINIR
+    editado? : boolean;
 }
 
 export const EditCard = (props : IEditCardProps) => {
@@ -82,6 +85,23 @@ export const EditCard = (props : IEditCardProps) => {
         .then(async (response) => {
             if (response.ok) {
                 // atualiza (ou adiciona) so esse pokemon na lista, sem recarregar a pagina
+                props.onSave(await response.json());
+            } else {
+                setErro(await mensagemDeErro(response));
+            }
+        })
+        .catch(() => setErro("Não foi possível conectar com a API."));
+    };
+
+    // volta o pokemon para os dados originais (so para os 151 que foram editados)
+    const RedefinirPokemon = () => {
+        if (!window.confirm(`Voltar ${props.name.toUpperCase()} aos dados originais? As alterações serão perdidas.`)) {
+            return;
+        }
+
+        fetch(`${API_URL}/pokemons/${props.id_pokemon}/redefinir`, { method: 'POST' })
+        .then(async (response) => {
+            if (response.ok) {
                 props.onSave(await response.json());
             } else {
                 setErro(await mensagemDeErro(response));
@@ -204,6 +224,12 @@ export const EditCard = (props : IEditCardProps) => {
                 <button type="button" className="btn cancel" onClick={props.onCancel}>
                     CANCELAR
                 </button>
+
+                {props.editado && !props.novo && (
+                    <button type="button" className="btn reset" onClick={RedefinirPokemon}>
+                        REDEFINIR
+                    </button>
+                )}
 
                 {/* so da para colocar na equipe depois que o pokemon existe */}
                 {!props.novo && (

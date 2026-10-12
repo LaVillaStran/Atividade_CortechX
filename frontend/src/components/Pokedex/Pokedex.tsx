@@ -13,6 +13,7 @@ interface Pokemon {
     tipo_1 : string,
     tipo_2? : string,
     sprite : string | null,
+    editado? : boolean,
 }
 
 export const Pokedex = () => {
@@ -58,7 +59,7 @@ export const Pokedex = () => {
         .catch(() => setErro("Não foi possível conectar com a API."));
     };
 
-    useEffect(() => {
+    const carregarPokemons = () => {
         fetch(`${API_URL}/pokemons/`)
         .then(async (response) => {
             // se a API der erro, o corpo nao e uma lista e o .slice() mais abaixo quebraria a tela toda
@@ -73,7 +74,28 @@ export const Pokedex = () => {
             setErro("Não foi possível carregar os pokémons. O backend está rodando?");
             setLoading(false);
         });
-    }, []);
+    };
+
+    useEffect(carregarPokemons, []);
+
+    // volta todos os originais editados para os dados do seed e recarrega a lista
+    const RedefinirTodos = (quantidade : number) => {
+        const texto = quantidade === 1 ? '1 pokémon editado vai' : `${quantidade} pokémons editados vão`;
+        if (!window.confirm(`${texto} voltar ao original. Continuar?`)) {
+            return;
+        }
+
+        fetch(`${API_URL}/pokemons/redefinir`, { method: 'POST' })
+        .then(async (response) => {
+            if (response.ok) {
+                setErro('');
+                carregarPokemons();
+            } else {
+                setErro(await mensagemDeErro(response));
+            }
+        })
+        .catch(() => setErro("Não foi possível conectar com a API."));
+    };
 
     if (loading) {
         return <p>Carregando Pokédex...</p>
@@ -88,6 +110,10 @@ export const Pokedex = () => {
         (!filtroOrigem || (filtroOrigem === 'criados') === (p.id > ULTIMO_POKEMON_ORIGINAL))
     );
     const temFiltro = Boolean(termo || filtroTipo || filtroRegiao || filtroOrigem);
+
+    // o "redefinir todos" so aparece no filtro ORIGINAIS e quando tem algum editado
+    const quantidadeEditados = pokemons.filter(p => p.editado).length;
+    const mostrarRedefinirTodos = filtroOrigem === 'originais' && quantidadeEditados > 0;
 
     // numero sugerido para o novo pokemon: o proximo depois do maior que ja existe (152, 153...)
     const proximoId = Math.max(ULTIMO_POKEMON_ORIGINAL, ...pokemons.map(p => p.id)) + 1;
@@ -176,6 +202,7 @@ export const Pokedex = () => {
                         type_1={pokemonToEdit.tipo_1}
                         type_2={pokemonToEdit.tipo_2}
                         img={pokemonToEdit.sprite}
+                        editado={pokemonToEdit.editado}
                         onCancel={() => setEditPokemonId(null)}
                         onSave={(atualizado) => {
                             setPokemons((prev) => prev.map(p => p.id === atualizado.id ? atualizado : p));
@@ -230,11 +257,19 @@ export const Pokedex = () => {
                             </button>
                         </div>
 
-                        {temFiltro && (
-                            <div className='search-count'>
-                                {filtrados.length === 0
-                                    ? 'NENHUM POKÉMON ENCONTRADO'
-                                    : `${filtrados.length} POKÉMON${filtrados.length > 1 ? 'S' : ''} ENCONTRADO${filtrados.length > 1 ? 'S' : ''}`}
+                        {(temFiltro || mostrarRedefinirTodos) && (
+                            <div className='search-info'>
+                                <div className='search-count'>
+                                    {filtrados.length === 0
+                                        ? 'NENHUM POKÉMON ENCONTRADO'
+                                        : `${filtrados.length} POKÉMON${filtrados.length > 1 ? 'S' : ''} ENCONTRADO${filtrados.length > 1 ? 'S' : ''}`}
+                                </div>
+
+                                {mostrarRedefinirTodos && (
+                                    <button className='reset-all' onClick={() => RedefinirTodos(quantidadeEditados)}>
+                                        REDEFINIR TODOS ({quantidadeEditados} EDITADO{quantidadeEditados > 1 ? 'S' : ''})
+                                    </button>
+                                )}
                             </div>
                         )}
 
