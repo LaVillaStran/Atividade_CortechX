@@ -82,6 +82,8 @@ width: 70px;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
+    /* nada passa da borda do quadrado, qualquer que seja a sprite */
+    overflow: hidden;
 }
 
 .card-img-container img {
@@ -89,6 +91,10 @@ width: 70px;
     height: 100%;
     object-fit: contain;
     image-rendering: pixelated;
+}
+
+/* as sprites do Pokémon Yellow (os 151) têm muita margem vazia, então só elas ganham zoom */
+.card-img-container img[src*="generation-i/yellow"] {
     transform: scale(1.6);
 }
 
