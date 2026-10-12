@@ -1,5 +1,6 @@
 import { useState } from "react"
 import './Editcard.css'
+import { API_URL } from '../../api'
 
 interface IEditCardProps {
     id_pokemon : number,
@@ -30,7 +31,7 @@ export const EditCard = (props : IEditCardProps) => {
             sprite: sprite
         };
 
-        fetch(`http://127.0.0.1:8000/pokemons/${props.id_pokemon}`, {
+        fetch(`${API_URL}/pokemons/${props.id_pokemon}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',

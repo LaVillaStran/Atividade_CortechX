@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { PokemonCard } from "../PokemonCard/PokemonCard";
-import { EditCard } from "../EditCard/EditCard"; 
+import { EditCard } from "../EditCard/EditCard";
+import { API_URL } from "../../api";
 import './Pokedex.css'
 
 interface Pokemon {
@@ -23,7 +24,7 @@ export const Pokedex = () => {
     const [editPokemonId, setEditPokemonId] = useState<number | null>(null);
 
     const DeletePokemon = (id : number) => {
-        fetch(`http://127.0.0.1:8000/pokemons/${id}`, {
+        fetch(`${API_URL}/pokemons/${id}`, {
             method: 'DELETE',
         })
         .then((response) => {
@@ -36,7 +37,7 @@ export const Pokedex = () => {
     };
 
     useEffect(() => {
-        fetch('http://127.0.0.1:8000/pokemons/').then((response) => response.json())
+        fetch(`${API_URL}/pokemons/`).then((response) => response.json())
         .then((data) => {
             setPokemons(data);
             setLoading(false);
