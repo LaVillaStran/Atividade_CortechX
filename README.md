@@ -52,6 +52,8 @@ As rotas ficam em `app/routers/pokemons.py` e `app/routers/equipe.py`.
 | POST   | `/pokemons/`             | Cadastra um novo pokémon                         |
 | PUT    | `/pokemons/{pokemon_id}` | Atualiza os dados de um pokémon (o id não muda)  |
 | DELETE | `/pokemons/{pokemon_id}` | Deleta um pokémon criado e tira ele das equipes  |
+| POST   | `/pokemons/{pokemon_id}/redefinir` | Volta um dos 151 originais aos dados do seed |
+| POST   | `/pokemons/redefinir`    | Volta todos os originais editados de uma vez     |
 
 Exemplo de corpo JSON no POST (no PUT é igual, só que sem o `id`):
 
@@ -73,6 +75,7 @@ Regras:
 - `tipo_2` é opcional e não pode ser igual ao `tipo_1`
 - não pode ter dois pokémons com o mesmo nome nem com o mesmo id
 - os 151 originais (1ª geração) não podem ser deletados, só os criados (id acima de 151)
+- os originais podem ser editados e depois redefinidos; a listagem traz `editado: true` nos que foram alterados
 
 #### Equipes
 
