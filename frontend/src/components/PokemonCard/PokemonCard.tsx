@@ -1,5 +1,5 @@
 import './PokemonCard.css'
-import { SPRITE_PADRAO } from '../../api'
+import { SPRITE_PADRAO, ULTIMO_POKEMON_ORIGINAL } from '../../api'
 
 interface IPokemonCardProps {
     id_pokemon : number,
@@ -53,9 +53,12 @@ export const PokemonCard = (props : IPokemonCardProps) => {
             
             <div className="card-actions">
                 <button className="btn btn-add" onClick={() => props.onAddTeam(props.id_pokemon)}>+ EQUIPE</button>
-                <button className="btn btn-delete" onClick={() => props.onDelete(props.id_pokemon)}>
-                    DELETAR
-                </button>
+                {/* so os pokemons criados podem ser deletados */}
+                {props.id_pokemon > ULTIMO_POKEMON_ORIGINAL && (
+                    <button className="btn btn-delete" onClick={() => props.onDelete(props.id_pokemon)}>
+                        DELETAR
+                    </button>
+                )}
             </div>
         </div>
     );

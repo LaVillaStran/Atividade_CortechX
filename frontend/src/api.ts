@@ -7,6 +7,9 @@ export const TIPOS = [
     'flying', 'psychic', 'bug', 'rock', 'ghost', 'dragon', 'dark', 'steel', 'fairy',
 ];
 
+// os 151 da 1a geracao sao a pokedex original e nao podem ser deletados (o backend tambem bloqueia)
+export const ULTIMO_POKEMON_ORIGINAL = 151;
+
 // imagem usada quando o pokemon nao tem sprite
 export const SPRITE_PADRAO = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png';
 
