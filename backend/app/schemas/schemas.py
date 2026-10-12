@@ -95,6 +95,9 @@ class PokemonOut(BaseModel):
     tipo_2: Optional[str] = None
     sprite: Optional[str] = None
 
+    # true quando um dos 151 originais foi alterado e pode ser redefinido
+    editado: bool = False
+
     model_config = {"from_attributes": True}
 
 

@@ -8,6 +8,7 @@ from .. import models, schemas
 from ..database.database_pokemons import get_db
 from ..database.database_equipes import get_db_equipes
 from .equipe import SLOTS
+from ..seed.seed import CAMPOS, pokemons_originais
 
 router = APIRouter(
     prefix="/pokemons",
@@ -26,13 +27,32 @@ def para_schema(pokemon: models.PokemonDB) -> schemas.PokemonOut:
         tipo_1=pokemon.tipo_1,
         tipo_2=pokemon.tipo_2,
         sprite=pokemon.sprite,
+        editado=foi_editado(pokemon),
     )
 
+# compara com os dados do seed; pokemon criado nunca conta como editado
+def foi_editado(pokemon: models.PokemonDB) -> bool:
+    original = pokemons_originais().get(pokemon.id)
+    if original is None:
+        return False
+    return any(getattr(pokemon, campo) != original[campo] for campo in CAMPOS)
+
+# volta um pokemon para os dados do seed (usado pelas duas rotas de redefinir)
+# ignorar_ids: os que estao sendo redefinidos juntos (no "redefinir todos" eles tambem vao voltar ao nome original)
+def restaurar(pokemon: models.PokemonDB, db: Session, ignorar_ids: Optional[set] = None):
+    original = pokemons_originais()[pokemon.id]
+    # se alguem criou um pokemon com o nome original, nao da para voltar sem repetir o nome
+    verificar_nome(original["nome"], db, ignorar_id=pokemon.id, ignorar_ids=ignorar_ids)
+    for campo, valor in original.items():
+        setattr(pokemon, campo, valor)
+
 # nao deixa ter dois pikemons com o mesmo nome (o schema ja guarda o nome em minusculo)
-def verificar_nome(nome: str, db: Session, ignorar_id: Optional[int] = None):
+def verificar_nome(nome: str, db: Session, ignorar_id: Optional[int] = None, ignorar_ids: Optional[set] = None):
     consulta = db.query(models.PokemonDB).filter(models.PokemonDB.nome == nome)
     if ignorar_id is not None:
         consulta = consulta.filter(models.PokemonDB.id != ignorar_id)
+    if ignorar_ids:
+        consulta = consulta.filter(models.PokemonDB.id.not_in(ignorar_ids))
     if consulta.first():
         raise HTTPException(status_code=409, detail="Já existe um pokémon com esse nome.")
 
@@ -142,3 +162,31 @@ def buscar_pokemon(pokemon_id: int, db: Session = Depends(get_db)):
     if not pokemon_db:
         raise HTTPException(status_code=404, detail="Pokémon não encontrado.")
     return para_schema(pokemon_db)
+
+# POST redefinir - volta um dos 151 originais para os dados do seed
+@router.post("/{pokemon_id}/redefinir", response_model=schemas.PokemonOut)
+def redefinir_pokemon(pokemon_id: int, db: Session = Depends(get_db)):
+    pokemon_db = db.get(models.PokemonDB, pokemon_id)
+    if not pokemon_db:
+        raise HTTPException(status_code=404, detail="Pokémon não encontrado.")
+    if pokemon_id not in pokemons_originais():
+        raise HTTPException(status_code=400, detail="Só os pokémons originais podem ser redefinidos.")
+
+    restaurar(pokemon_db, db)
+    db.commit()
+    db.refresh(pokemon_db)
+    return para_schema(pokemon_db)
+
+# POST redefinir todos - volta todos os originais editados de uma vez
+@router.post("/redefinir")
+def redefinir_todos(db: Session = Depends(get_db)):
+    editados = [
+        p for p in db.query(models.PokemonDB).filter(models.PokemonDB.id.in_(pokemons_originais())).all()
+        if foi_editado(p)
+    ]
+    # se um deles nao puder voltar (nome ja usado), da erro antes de mudar qualquer um
+    ids = {p.id for p in editados}
+    for pokemon in editados:
+        restaurar(pokemon, db, ignorar_ids=ids)
+    db.commit()
+    return {"redefinidos": len(editados)}
