@@ -204,6 +204,10 @@ width: 70px;
     background-color: #B7B7CE;
 }
 
+.badge.dark {
+    background-color: #705848;
+}
+
 .card-actions {
     display: flex; 
     gap: 5px; 
