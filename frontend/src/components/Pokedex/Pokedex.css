@@ -153,3 +153,21 @@
     color: #282C1E;
     margin: -5px 0 12px 4px;
 }
+
+/* botao de criar pokemon: laranja igual ao EDITAR */
+.search-new {
+    background-color: #F0AD4E;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 8px 10px;
+    border: 2px solid #282C1E;
+    border-radius: 4px;
+    cursor: pointer;
+    box-shadow: 0 3px 0 #14160E;
+    white-space: nowrap;
+}
+
+.search-new:active {
+    transform: translateY(3px);
+    box-shadow: 0 0 0 #14160E;
+}

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { PokemonCard } from "../PokemonCard/PokemonCard";
 import { EditCard } from "../EditCard/EditCard";
 import { EscolherEquipe } from "../EscolherEquipe/EscolherEquipe";
-import { API_URL, TIPOS, REGIOES, mensagemDeErro } from "../../api";
+import { API_URL, TIPOS, REGIOES, ULTIMO_POKEMON_ORIGINAL, mensagemDeErro } from "../../api";
 import './Pokedex.css'
 
 interface Pokemon {
@@ -32,6 +32,11 @@ export const Pokedex = () => {
     const [busca, setBusca] = useState<string>('');
     const [filtroTipo, setFiltroTipo] = useState<string>('');
     const [filtroRegiao, setFiltroRegiao] = useState<string>('');
+    // '' = todos, 'originais' = os 151 da 1a geracao, 'criados' = os criados pelo usuario
+    const [filtroOrigem, setFiltroOrigem] = useState<string>('');
+
+    // true enquanto o formulario de novo pokemon esta aberto
+    const [criando, setCriando] = useState<boolean>(false);
 
     const DeletePokemon = (id : number) => {
         const pokemon = pokemons.find(p => p.id === id);
@@ -79,9 +84,13 @@ export const Pokedex = () => {
     const filtrados = pokemons.filter((p) =>
         (!termo || p.nome.includes(termo) || String(p.id) === termo) &&
         (!filtroTipo || p.tipo_1 === filtroTipo || p.tipo_2 === filtroTipo) &&
-        (!filtroRegiao || p.regiao === filtroRegiao)
+        (!filtroRegiao || p.regiao === filtroRegiao) &&
+        (!filtroOrigem || (filtroOrigem === 'criados') === (p.id > ULTIMO_POKEMON_ORIGINAL))
     );
-    const temFiltro = Boolean(termo || filtroTipo || filtroRegiao);
+    const temFiltro = Boolean(termo || filtroTipo || filtroRegiao || filtroOrigem);
+
+    // numero sugerido para o novo pokemon: o proximo depois do maior que ja existe (152, 153...)
+    const proximoId = Math.max(ULTIMO_POKEMON_ORIGINAL, ...pokemons.map(p => p.id)) + 1;
 
     const totalPages = Math.max(1, Math.ceil(filtrados.length / itemsPerPage));
     // se a lista diminuiu (filtro ou delete), nao deixa ficar numa pagina que nao existe mais
@@ -101,6 +110,7 @@ export const Pokedex = () => {
         setBusca('');
         setFiltroTipo('');
         setFiltroRegiao('');
+        setFiltroOrigem('');
         setCurrentPage(1);
     };
 
@@ -133,7 +143,30 @@ export const Pokedex = () => {
                         onClose={() => setTeamPokemonId(null)}
                     />
                 )}
-                {editPokemonId && pokemonToEdit ? (
+                {criando ? (
+                    <EditCard
+                        key="novo"
+                        novo
+                        id_pokemon={proximoId}
+                        name=""
+                        generation={1}
+                        region="kanto"
+                        type_1="normal"
+                        img={null}
+                        onCancel={() => setCriando(false)}
+                        onSave={(novo) => {
+                            setPokemons((prev) => [...prev, novo].sort((a, b) => a.id - b.id));
+                            setCriando(false);
+                            // mostra os criados para o novo pokemon aparecer na tela
+                            setBusca('');
+                            setFiltroTipo('');
+                            setFiltroRegiao('');
+                            setFiltroOrigem('criados');
+                            setCurrentPage(1);
+                        }}
+                        onAddTeam={() => {}}
+                    />
+                ) : editPokemonId && pokemonToEdit ? (
                     <EditCard 
                         key={pokemonToEdit.id}
                         id_pokemon={pokemonToEdit.id}
@@ -180,8 +213,20 @@ export const Pokedex = () => {
                                     <option key={regiao} value={regiao}>{regiao.toUpperCase()}</option>
                                 ))}
                             </select>
+                            <select
+                                className='search-select'
+                                value={filtroOrigem}
+                                onChange={(e) => mudarFiltro(setFiltroOrigem, e.target.value)}
+                            >
+                                <option value="">TODOS</option>
+                                <option value="originais">ORIGINAIS</option>
+                                <option value="criados">CRIADOS</option>
+                            </select>
                             <button className='search-clear' onClick={limparFiltros} disabled={!temFiltro}>
                                 LIMPAR
+                            </button>
+                            <button className='search-new' onClick={() => setCriando(true)}>
+                                + NOVO
                             </button>
                         </div>
 

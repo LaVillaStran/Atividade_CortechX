@@ -23,9 +23,12 @@ interface IEditCardProps {
     onCancel: () => void;
     onSave: (pokemon : IPokemonAtualizado) => void;
     onAddTeam: (id : number) => void;
+    // true = formulario de criar (POST), com o numero editavel e sem o "+ EQUIPE"
+    novo? : boolean;
 }
 
 export const EditCard = (props : IEditCardProps) => {
+    const [idPokemon, setIdPokemon] = useState<string>(String(props.id_pokemon));
     const [name, setName] = useState<string>(props.name);
     const [type1, setType1] = useState<string>(props.type_1);
     const [type2, setType2] = useState<string>(props.type_2 || '');
@@ -41,6 +44,15 @@ export const EditCard = (props : IEditCardProps) => {
     };
 
     const EditPokemonAPI = () => {
+        if (!name.trim()) {
+            setErro("Digite o nome do pokémon.");
+            return;
+        }
+        if (props.novo && !(Number(idPokemon) > 0)) {
+            setErro("O número precisa ser maior que zero.");
+            return;
+        }
+
         const updatedPokemon = {
             nome: name,
             geracao: generation,
@@ -51,16 +63,25 @@ export const EditCard = (props : IEditCardProps) => {
             sprite: sprite.trim() || null
         };
 
-        fetch(`${API_URL}/pokemons/${props.id_pokemon}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(updatedPokemon),
-        })
+        // criar manda o numero no corpo (POST); editar manda na URL (PUT)
+        const requisicao = props.novo
+            ? fetch(`${API_URL}/pokemons/`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ id: Number(idPokemon), ...updatedPokemon }),
+            })
+            : fetch(`${API_URL}/pokemons/${props.id_pokemon}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(updatedPokemon),
+            });
+
+        requisicao
         .then(async (response) => {
             if (response.ok) {
-                // atualiza so esse pokemon na lista, sem recarregar a pagina
+                // atualiza (ou adiciona) so esse pokemon na lista, sem recarregar a pagina
                 props.onSave(await response.json());
             } else {
                 setErro(await mensagemDeErro(response));
@@ -72,12 +93,27 @@ export const EditCard = (props : IEditCardProps) => {
     return (
         <div className='edit-card-container'>
             <div className='header-edit'>
-                <span>EDITAR POKÉMON #{props.id_pokemon} - {props.name}</span>
+                <span>
+                    {props.novo ? 'NOVO POKÉMON' : `EDITAR POKÉMON #${props.id_pokemon} - ${props.name}`}
+                </span>
             </div>
 
             <div className='card-img-edit'>
                 <img src={sprite || SPRITE_PADRAO} alt={name}></img>
             </div>
+
+            {props.novo && (
+                <div className='input-name-container'>
+                    <label>NÚMERO:</label>
+                    <input
+                        className='input-name'
+                        type="number"
+                        min={1}
+                        value={idPokemon}
+                        onChange={(e) => setIdPokemon(e.target.value)}
+                    />
+                </div>
+            )}
 
             <div className='input-name-container'>
                 <label>NOME:</label>
@@ -162,16 +198,19 @@ export const EditCard = (props : IEditCardProps) => {
 
             <div className="footer-edit">
                 <button type="button" className="btn save-changes" onClick={EditPokemonAPI}>
-                    SALVAR ALTERAÇÕES
+                    {props.novo ? 'CRIAR POKÉMON' : 'SALVAR ALTERAÇÕES'}
                 </button>
 
                 <button type="button" className="btn cancel" onClick={props.onCancel}>
                     CANCELAR
                 </button>
 
-                <button type="button" className="btn-add" onClick={() => props.onAddTeam(props.id_pokemon)}>
-                    + EQUIPE
-                </button>
+                {/* so da para colocar na equipe depois que o pokemon existe */}
+                {!props.novo && (
+                    <button type="button" className="btn-add" onClick={() => props.onAddTeam(props.id_pokemon)}>
+                        + EQUIPE
+                    </button>
+                )}
             </div>
         </div>
     );
