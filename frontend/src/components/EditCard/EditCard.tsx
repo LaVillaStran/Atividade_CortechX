@@ -9,17 +9,45 @@ interface IEditCardProps {
     type_1 : string,
     type_2? : string,
     img : string,
-    onCancel: () => void; // <--- Adicionado para fechar a edição
+    onCancel: () => void;
 }
 
 export const EditCard = (props : IEditCardProps) => {
-    // Inicializamos com os valores atuais do Pokémon para facilitar a edição
     const [name, setName] = useState<string>(props.name);
     const [type1, setType1] = useState<string>(props.type_1);
     const [type2, setType2] = useState<string>(props.type_2 || '');
     const [region, setRegion] = useState<string>(props.region);
     const [sprite, setSprite] = useState<string>(props.img);
     const [generation, setGeneration] = useState<number>(props.generation);
+
+    const EditPokemonAPI = () => {
+        const updatedPokemon = {
+            nome: name,
+            geracao: generation,
+            regiao: region,
+            tipo_1: type1,
+            tipo_2: type2 || null,
+            sprite: sprite
+        };
+
+        fetch(`http://127.0.0.1:8000/pokemons/${props.id_pokemon}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(updatedPokemon),
+        })
+        .then((response) => {
+            if (response.ok) {
+                console.log("Pokémon atualizado com sucesso!");
+                props.onCancel();
+                window.location.reload();
+            } else {
+                console.error("Erro ao atualizar o Pokémon");
+            }
+        })
+        .catch((error) => console.error("Erro na requisição PUT:", error));
+    };
 
     return (
         <div className='edit-card-container'>
@@ -28,15 +56,14 @@ export const EditCard = (props : IEditCardProps) => {
             </div>
 
             <div className='card-img-edit'>
-                <img className='card-img-edit img' src={sprite || props.img} alt={name}></img>
+                <img src={sprite || props.img} alt={name}></img>
             </div>
 
             <div className='input-name-container'>
                 <label>NOME:</label>
                 <input 
                     className='input-name' 
-                    type="text" 
-                    value={name} 
+                    type="text"
                     onChange={(e) => setName(e.target.value)}
                 />
             </div>
@@ -111,17 +138,16 @@ export const EditCard = (props : IEditCardProps) => {
                 <input 
                     className='input-sprite' 
                     type="text" 
-                    value={sprite} 
                     onChange={(e) => setSprite(e.target.value)}
                 />
             </div>
 
             <div className="footer-edit">
-                <button className="btn save-changes">
+                <button type="button" className="btn save-changes" onClick={EditPokemonAPI}>
                     SALVAR ALTERAÇÕES
                 </button>
 
-                <button className="btn cancel" onClick={props.onCancel}>
+                <button type="button" className="btn cancel" onClick={props.onCancel}>
                     CANCELAR
                 </button>
 

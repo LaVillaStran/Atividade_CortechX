@@ -31,7 +31,7 @@ export const PokemonCard = (props : IPokemonCardProps) => {
             
 
             <div className='card-body'>
-                <div className='card-img-container'><img className='card-image-container img' src={props.img} alt={props.name}></img></div>
+                <div className='card-img-container'><img className='card-image-container img' src={props.img || "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png"} alt={props.name}></img></div>
                 <div className='card-details'>
                     <div className="card-name-pokemon">{props.name.toUpperCase()}</div>
                     <div className="types-container">
