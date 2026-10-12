@@ -1,6 +1,6 @@
 import { useState } from "react"
 import './Editcard.css'
-import { API_URL, TIPOS, REGIOES, mensagemDeErro } from '../../api'
+import { API_URL, TIPOS, REGIOES, SPRITE_PADRAO, mensagemDeErro } from '../../api'
 
 export interface IPokemonAtualizado {
     id : number,
@@ -9,7 +9,7 @@ export interface IPokemonAtualizado {
     regiao : string,
     tipo_1 : string,
     tipo_2? : string,
-    sprite : string,
+    sprite : string | null,
 }
 
 interface IEditCardProps {
@@ -19,7 +19,7 @@ interface IEditCardProps {
     region : string,
     type_1 : string,
     type_2? : string,
-    img : string,
+    img : string | null,
     onCancel: () => void;
     onSave: (pokemon : IPokemonAtualizado) => void;
 }
@@ -29,7 +29,7 @@ export const EditCard = (props : IEditCardProps) => {
     const [type1, setType1] = useState<string>(props.type_1);
     const [type2, setType2] = useState<string>(props.type_2 || '');
     const [region, setRegion] = useState<string>(props.region);
-    const [sprite, setSprite] = useState<string>(props.img);
+    const [sprite, setSprite] = useState<string>(props.img ?? '');
     const [generation, setGeneration] = useState<number>(props.generation);
     const [erro, setErro] = useState<string>('');
 
@@ -46,7 +46,8 @@ export const EditCard = (props : IEditCardProps) => {
             regiao: region,
             tipo_1: type1,
             tipo_2: type2 || null,
-            sprite: sprite
+            // campo vazio vira nulo, ai o card mostra a imagem padrao
+            sprite: sprite.trim() || null
         };
 
         fetch(`${API_URL}/pokemons/${props.id_pokemon}`, {
@@ -74,7 +75,7 @@ export const EditCard = (props : IEditCardProps) => {
             </div>
 
             <div className='card-img-edit'>
-                <img src={sprite || props.img} alt={name}></img>
+                <img src={sprite || SPRITE_PADRAO} alt={name}></img>
             </div>
 
             <div className='input-name-container'>

@@ -7,6 +7,9 @@ export const TIPOS = [
     'flying', 'psychic', 'bug', 'rock', 'ghost', 'dragon', 'dark', 'steel', 'fairy',
 ];
 
+// imagem usada quando o pokemon nao tem sprite
+export const SPRITE_PADRAO = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png';
+
 export const REGIOES = ['kanto', 'johto', 'hoenn', 'sinnoh', 'unova', 'kalos', 'alola', 'galar', 'paldea'];
 
 // pega a mensagem de erro que o FastAPI manda no "detail"

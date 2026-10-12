@@ -11,7 +11,7 @@ interface Pokemon {
     regiao : string,
     tipo_1 : string,
     tipo_2? : string,
-    sprite : string,
+    sprite : string | null,
 }
 
 export const Pokedex = () => {
