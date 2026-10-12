@@ -24,6 +24,14 @@ def para_schema(pokemon: models.PokemonDB) -> schemas.PokemonOut:
         sprite=pokemon.sprite,
     )
 
+# nao deixa ter dois pikemons com o mesmo nome (o schema ja guarda o nome em minusculo)
+def verificar_nome(nome: str, db: Session, ignorar_id: Optional[int] = None):
+    consulta = db.query(models.PokemonDB).filter(models.PokemonDB.nome == nome)
+    if ignorar_id is not None:
+        consulta = consulta.filter(models.PokemonDB.id != ignorar_id)
+    if consulta.first():
+        raise HTTPException(status_code=409, detail="Já existe um pokémon com esse nome.")
+
 # get pikemons - busca todos os pikemons no banco de dados e retorna ordenado por ID
 @router.get("/", response_model=List[schemas.PokemonOut])
 def listar_pokemons(db: Session = Depends(get_db)):
@@ -36,6 +44,8 @@ def criar_pokemon(pokemon: schemas.PokemonCreate, db: Session = Depends(get_db))
     # caso o id nao exista
     if db.get(models.PokemonDB, pokemon.id):
         raise HTTPException(status_code=409, detail="Já existe um pokémon com esse id.")
+
+    verificar_nome(pokemon.nome, db)
 
     dados = pokemon.model_dump()
 
@@ -52,6 +62,8 @@ def atualizar_pokemon(pokemon_id: int, pokemon_atualizado: schemas.PokemonUpdate
     # caso o id nao exsta
     if not pokemon_db:
         raise HTTPException(status_code=404, detail="Pokémon não encontrado.")
+
+    verificar_nome(pokemon_atualizado.nome, db, ignorar_id=pokemon_id)
 
     # o id vem so da URL, o corpo nao tem id (ver PokemonUpdate)
     dados = pokemon_atualizado.model_dump()
