@@ -14,6 +14,9 @@ router = APIRouter(
     tags=["pokemons"],
 )
 
+# os 151 da 1a geracao vem do seed e sao a pokedex original: nao podem ser deletados
+ULTIMO_POKEMON_ORIGINAL = 151
+
 def para_schema(pokemon: models.PokemonDB) -> schemas.PokemonOut:
     return schemas.PokemonOut(
         id=pokemon.id,
@@ -86,6 +89,9 @@ def deletar_pokemon(
     pokemon_db = db.get(models.PokemonDB, pokemon_id)
     if not pokemon_db:
         raise HTTPException(status_code=404, detail="Pokémon não encontrado.")
+
+    if pokemon_id <= ULTIMO_POKEMON_ORIGINAL:
+        raise HTTPException(status_code=403, detail="Os pokémons originais (1 a 151) não podem ser deletados.")
     
     db.delete(pokemon_db)
     db.commit()
