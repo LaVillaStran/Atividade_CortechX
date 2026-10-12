@@ -247,3 +247,13 @@
     text-overflow: ellipsis;
     white-space: nowrap;
 }
+
+.team-actions {
+    display: flex;
+    gap: 6px;
+    flex-shrink: 0;
+}
+
+.team-header .retro-input {
+    flex: 1;
+}

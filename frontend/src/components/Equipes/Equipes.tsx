@@ -50,6 +50,9 @@ export const Equipes = () => {
     const [novoTreinador, setNovoTreinador] = useState<string>('');
     const [busca, setBusca] = useState<string>('');
 
+    // nome sendo digitado ao renomear; null = nao esta renomeando
+    const [novoNome, setNovoNome] = useState<string | null>(null);
+
     // chama a API e devolve o JSON, ou mostra o erro na tela e devolve null
     const chamarApi = async (caminho : string, metodo : string = 'GET', corpo? : object) => {
         try {
@@ -77,7 +80,10 @@ export const Equipes = () => {
 
     const abrirEquipe = async (id : number) => {
         const detalhe = await chamarApi(`/equipes/${id}`);
-        if (detalhe) setSelecionada(detalhe);
+        if (detalhe) {
+            setSelecionada(detalhe);
+            setNovoNome(null);
+        }
     };
 
     useEffect(() => {
@@ -95,6 +101,18 @@ export const Equipes = () => {
             setNovoTreinador('');
             await carregarEquipes();
             await abrirEquipe(nova.id);
+        }
+    };
+
+    // o PUT troca a equipe inteira, entao manda os 6 slots atuais junto com o nome novo
+    const renomearEquipe = async (e : React.FormEvent) => {
+        e.preventDefault();
+        const equipe = equipes.find((eq) => eq.id === selecionada?.id);
+        if (!equipe || novoNome === null) return;
+
+        if (await chamarApi(`/equipes/${equipe.id}`, 'PUT', { ...equipe, nome_treinador: novoNome })) {
+            await abrirEquipe(equipe.id);
+            await carregarEquipes();
         }
     };
 
@@ -174,10 +192,27 @@ export const Equipes = () => {
                             </div>
                         ) : (
                             <>
-                                <div className='team-header'>
-                                    <span className='panel-title'>EQUIPE DE {selecionada.nome_treinador.toUpperCase()}</span>
-                                    <button className='btn-retro btn-danger' onClick={deletarEquipe}>DELETAR EQUIPE</button>
-                                </div>
+                                {novoNome !== null ? (
+                                    <form className='team-header' onSubmit={renomearEquipe}>
+                                        <input
+                                            className='retro-input'
+                                            type="text"
+                                            value={novoNome}
+                                            autoFocus
+                                            onChange={(e) => setNovoNome(e.target.value)}
+                                        />
+                                        <button className='btn-retro btn-create' type="submit" disabled={!novoNome.trim()}>SALVAR</button>
+                                        <button className='btn-retro' type="button" onClick={() => setNovoNome(null)}>CANCELAR</button>
+                                    </form>
+                                ) : (
+                                    <div className='team-header'>
+                                        <span className='panel-title'>EQUIPE DE {selecionada.nome_treinador.toUpperCase()}</span>
+                                        <div className='team-actions'>
+                                            <button className='btn-retro btn-create' onClick={() => setNovoNome(selecionada.nome_treinador)}>RENOMEAR</button>
+                                            <button className='btn-retro btn-danger' onClick={deletarEquipe}>DELETAR EQUIPE</button>
+                                        </div>
+                                    </div>
+                                )}
 
                                 <div className='team-grid'>
                                     {Array.from({ length: TAMANHO_EQUIPE }, (_, i) => selecionada.pokemons[i]).map((pokemon, i) => (
