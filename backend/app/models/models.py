@@ -1,9 +1,8 @@
 import json
 from typing import List
 
-from sqlalchemy import Column, Integer, String
-
-from .database import Base
+from sqlalchemy import Column, Integer, String, ForeignKey
+from app.database.database_pokemons import Base
 
 """
 O QUE É O ORM?
@@ -36,8 +35,8 @@ class PokemonDB(Base):
     
     # nullable=False: significa basicamente que este campo é obrigatório
     nome = Column(String, nullable=False, index=True)
-    geracao = Column(Integer, nullable=False, index=True)
-    regiao = Column(String, nullable=False, index=True)
+    geracao = Column(Integer, nullable=False)
+    regiao = Column(String, nullable=False)
     
     # os tipos de pokemons tiveram algumas reformulações e fizemos a criação,
     # de duas colunas contendo os tipos de um pokemon
@@ -51,3 +50,22 @@ class PokemonDB(Base):
     # nullable=True: caso o link da imagem quebre na API original,
     # a gnt vai aceitar que seja nulo (opcional) p evitar quebrar a API
     sprite = Column(String, nullable=True)
+
+class EquipeDB(Base):
+    __tablename__ = "Equipe"
+
+    id = Column(Integer, primary_key=True, index=True, autoincrement=True)
+    
+    nome_treinador = Column(String,nullable=False)
+ 
+    pokemon_1 = Column(Integer,ForeignKey("pokemons.id"),nullable=True)
+
+    pokemon_2 = Column(Integer,ForeignKey("pokemons.id"),nullable=True)
+
+    pokemon_3 = Column(Integer,ForeignKey("pokemons.id"),nullable=True)
+
+    pokemon_4 = Column(Integer,ForeignKey("pokemons.id"),nullable=True)
+
+    pokemon_5 = Column(Integer,ForeignKey("pokemons.id"),nullable=True)
+
+    pokemon_6 = Column(Integer,ForeignKey("pokemons.id"),nullable=True)

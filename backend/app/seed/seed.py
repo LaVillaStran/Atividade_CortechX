@@ -1,11 +1,11 @@
 import json
 from pathlib import Path
 
-from .database import Base, SessionLocal, engine
-from .models import PokemonDB
+from ..database import Base, SessionLocal, engine
+from ..models.models import PokemonDB
 
 # achar a pasta raiz independete da maquina
-ARQUIVO_JSON = Path(__file__).resolve().parents[2] / "Lista_pokemons.json"
+ARQUIVO_JSON = Path(__file__).resolve().parents[2] / "BancoDeDados/Lista_pokemons.json"
 
 
 def popular():

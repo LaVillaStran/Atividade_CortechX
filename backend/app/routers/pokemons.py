@@ -1,11 +1,12 @@
 import json
-from typing import List
+from typing import List, Optional
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Query
+from sqlalchemy import func, or_
 from sqlalchemy.orm import Session
 
 from .. import models, schemas
-from ..database import get_db
+from ..database.database_pokemons import get_db
 
 router = APIRouter(
     prefix="/pokemons",
@@ -79,30 +80,33 @@ def deletar_pokemon(pokemon_id: int, db: Session = Depends(get_db)):
 # EXTRAS:
 
 # GET nome 
-@router.get("/nome/{nome}", response_model=List[schemas.PokemonOut])
-def procura_pokemon_por_nome(nome : str, db: Session = Depends(get_db)):
-    pokemons = db.query(models.PokemonDB).filter(models.PokemonDB.nome == nome.strip().lower()).first() # Vai filtrar o pokémon que tem o nome exato que foi passado
-    if not pokemons:
-        raise HTTPException(status_code=404, detail="Pokémon não encontrado.") # Retorna um erro se não encontrar o nome no database
-    else:
-        return [para_schema(pokemons)]
+@router.get("/busca", response_model=List[schemas.PokemonOut])
+def buscar_pokemons(
+    nome: Optional[str] = Query(None, description="Nome exato do pokémon"),
+    regiao: Optional[str] = Query(None, description="Região do pokémon"),
+    tipo: Optional[str] = Query(None, description="Tipo 1 ou tipo 2"),
+    db: Session = Depends(get_db),
+):
+    consulta = db.query(models.PokemonDB)
 
-# GET regiao
-@router.get("/regiao/{regiao}", response_model=List[schemas.PokemonOut])
-def procurar_pokemon_por_regiao(regiao : str, db: Session = Depends(get_db)):
-    # Filtra os pokémons da região passada e ordena todos pelo ID, retorna todos daquela região
-    pokemons = db.query(models.PokemonDB).filter(models.PokemonDB.regiao == regiao.strip().lower()).order_by(models.PokemonDB.id).all()
-    if not pokemons:
-        raise HTTPException(status_code=404, detail="Região não existente no banco de dados")
-    else:  
-        return [para_schema(p) for p in pokemons]
+    if nome:
+        consulta = consulta.filter(func.lower(models.PokemonDB.nome) == nome.strip().lower())
 
-# GET tipo
-@router.get("/tipo/{tipo}", response_model=List[schemas.PokemonOut])
-def procura_pokemon_por_tipo(tipo : str, db: Session = Depends(get_db)):
-    pokemons = db.query(models.PokemonDB).filter(models.PokemonDB.tipo_1==tipo.strip().lower() or models.PokemonDB.tipo_2==tipo.strip().lower()).order_by(models.PokemonDB.id).all()
+    if regiao:
+        consulta = consulta.filter(func.lower(models.PokemonDB.regiao) == regiao.strip().lower())
+
+    if tipo:
+        t = tipo.strip().lower()
+        consulta = consulta.filter(
+            or_(
+                func.lower(models.PokemonDB.tipo_1) == t,
+                func.lower(models.PokemonDB.tipo_2) == t,
+            )
+        )
+
+    pokemons = consulta.order_by(models.PokemonDB.id).all()
 
     if not pokemons:
-        raise HTTPException(status_code=404, detail="Pokémon com esse tipo não encontrado")
-    else:
-        return [para_schema(p) for p in pokemons]
+        raise HTTPException(status_code=404, detail="Nenhum pokémon encontrado com esses filtros.")
+
+    return [para_schema(p) for p in pokemons]
