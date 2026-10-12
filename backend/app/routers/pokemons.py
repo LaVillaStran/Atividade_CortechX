@@ -104,9 +104,7 @@ def buscar_pokemons(
             )
         )
 
+    # sem resultado devolve lista vazia, a busca em si não deu erro
     pokemons = consulta.order_by(models.PokemonDB.id).all()
-
-    if not pokemons:
-        raise HTTPException(status_code=404, detail="Nenhum pokémon encontrado com esses filtros.")
 
     return [para_schema(p) for p in pokemons]
