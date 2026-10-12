@@ -117,3 +117,10 @@ def buscar_pokemons(
     pokemons = consulta.order_by(models.PokemonDB.id).all()
 
     return [para_schema(p) for p in pokemons]
+# GET por id - fica depois do /busca, senao o FastAPI tenta ler "busca" como id
+@router.get("/{pokemon_id}", response_model=schemas.PokemonOut)
+def buscar_pokemon(pokemon_id: int, db: Session = Depends(get_db)):
+    pokemon_db = db.get(models.PokemonDB, pokemon_id)
+    if not pokemon_db:
+        raise HTTPException(status_code=404, detail="Pokémon não encontrado.")
+    return para_schema(pokemon_db)
