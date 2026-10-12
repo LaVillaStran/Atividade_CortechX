@@ -48,9 +48,14 @@ export const Pokedex = () => {
     };
 
     useEffect(() => {
-        fetch(`${API_URL}/pokemons/`).then((response) => response.json())
-        .then((data) => {
-            setPokemons(data);
+        fetch(`${API_URL}/pokemons/`)
+        .then(async (response) => {
+            // se a API der erro, o corpo nao e uma lista e o .slice() mais abaixo quebraria a tela toda
+            if (response.ok) {
+                setPokemons(await response.json());
+            } else {
+                setErro(await mensagemDeErro(response));
+            }
             setLoading(false);
         })
         .catch(() => {
@@ -67,7 +72,7 @@ export const Pokedex = () => {
     const indexFirstItem = indexLastItem - itemsPerPage;
     const currentPokemons = pokemons.slice(indexFirstItem, indexLastItem);
 
-    const totalPages = Math.ceil(pokemons.length / itemsPerPage);
+    const totalPages = Math.max(1, Math.ceil(pokemons.length / itemsPerPage));
 
     const nextPage = () => {
         if (currentPage < totalPages) {
