@@ -16,6 +16,11 @@ SLOTS = ["pokemon_1", "pokemon_2", "pokemon_3", "pokemon_4", "pokemon_5", "pokem
 
 
 def validar_pokemons(equipe: schemas.EquipeCreate, db_pokemons: Session):
+    # não deixa o mesmo pokémon em mais de um slot
+    ids = [getattr(equipe, slot) for slot in SLOTS if getattr(equipe, slot) is not None]
+    if len(ids) != len(set(ids)):
+        raise HTTPException(status_code=422, detail="A equipe não pode ter pokémon repetido.")
+
     # confere no pokemons.db se cada id enviado existe
     for slot in SLOTS:
         # Aqui faremos uma busca pelos 
